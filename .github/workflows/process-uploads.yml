@@ -1,0 +1,32 @@
+name: Process uploads
+
+# Polls file_uploads for pending rows and parses them (csv/xlsx/pdf/image).
+# Also runs the daily staleness nudge. YouTube ingestion is NOT here — it
+# runs as a Supabase Edge Function on pg_cron (see /supabase/functions/youtube-ingest/).
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch: {}
+
+jobs:
+  process-uploads:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        working-directory: scraper
+        run: pip install -e .
+
+      - name: Parse pending uploads
+        working-directory: scraper
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: python -m aspora_scraper.ingest.process_upload

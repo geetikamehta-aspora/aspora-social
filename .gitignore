@@ -1,0 +1,23 @@
+# Secrets — never commit these
+.env
+.env.local
+.env.*.local
+scraper/.env
+
+# Node / Next.js
+web/node_modules/
+web/.next/
+web/out/
+web/next-env.d.ts
+web/*.tsbuildinfo
+
+# Python
+scraper/.venv/
+scraper/__pycache__/
+scraper/**/__pycache__/
+scraper/*.egg-info/
+scraper/.pytest_cache/
+scraper/.ruff_cache/
+
+# OS
+.DS_Store

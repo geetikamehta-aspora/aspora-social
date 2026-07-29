@@ -1,0 +1,36 @@
+# Firebase App Hosting config. Env vars declared here are available at both
+# build and runtime (Next.js needs NEXT_PUBLIC_* at build time to inline them
+# into the client bundle). Actual values are set via `firebase apphosting:secrets:set`
+# for sensitive ones, or directly here for values that are safe to commit
+# (there are none in this file — everything below is a reference, not a value).
+
+runConfig:
+  minInstances: 0
+  maxInstances: 2
+
+env:
+  - variable: NEXT_PUBLIC_SUPABASE_URL
+    availability: [BUILD, RUNTIME]
+  - variable: NEXT_PUBLIC_SUPABASE_ANON_KEY
+    availability: [BUILD, RUNTIME]
+  - variable: NEXT_PUBLIC_FIREBASE_API_KEY
+    availability: [BUILD, RUNTIME]
+  - variable: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+    availability: [BUILD, RUNTIME]
+  - variable: NEXT_PUBLIC_FIREBASE_PROJECT_ID
+    availability: [BUILD, RUNTIME]
+  - variable: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
+    availability: [BUILD, RUNTIME]
+  - variable: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
+    availability: [BUILD, RUNTIME]
+  - variable: NEXT_PUBLIC_FIREBASE_APP_ID
+    availability: [BUILD, RUNTIME]
+
+  # No Firebase Admin SDK / Supabase service-role here — auth is Firebase-only
+  # + a client-side Supabase check now (see sql/003_rls.sql's header comment).
+  - variable: GAS_UPLOAD_WEBHOOK_URL
+    secret: GAS_UPLOAD_WEBHOOK_URL
+    availability: [RUNTIME]
+  - variable: GAS_UPLOAD_SHARED_SECRET
+    secret: GAS_UPLOAD_SHARED_SECRET
+    availability: [RUNTIME]
