@@ -61,7 +61,6 @@ section{position:relative}
 .reveal{opacity:0;transform:translateY(34px);transition:opacity .8s var(--smooth) var(--d,0s),transform .9s var(--smooth) var(--d,0s)}
 .reveal.pop{transform:translateY(40px) scale(.9) rotate(-2deg);transition-timing-function:var(--smooth),var(--bounce)}
 .reveal.in{opacity:1;transform:none}
-.no-js .reveal{opacity:1;transform:none}
 
 /* ---------- preloader ---------- */
 .preloader{position:fixed;inset:0;z-index:10001;background:var(--gold);display:grid;place-items:center;
@@ -84,7 +83,7 @@ section{position:relative}
 .progress svg{position:absolute;top:-4px;left:0;width:22px;height:22px;fill:var(--choc);transform:translateX(-50%) rotate(90deg)}
 
 /* ---------- nav ---------- */
-.nav{position:fixed;top:16px;left:50%;translate:-50% 0;z-index:8000;width:min(1100px,100% - 24px);display:flex;align-items:center;justify-content:space-between;gap:16px;
+.nav{position:fixed;top:calc(16px + env(safe-area-inset-top,0px));left:50%;translate:-50% 0;z-index:8000;width:min(1100px,100% - 24px);display:flex;align-items:center;justify-content:space-between;gap:16px;
   padding:8px 10px 8px 22px;background:rgba(255,246,223,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:3px solid var(--choc);border-radius:999px;box-shadow:4px 4px 0 var(--choc);
   transition:transform .5s var(--smooth),opacity .5s;opacity:0;transform:translateY(-120%)}
 .is-ready .nav{opacity:1;transform:none;transition-delay:.6s}
@@ -381,4 +380,6 @@ section{position:relative}
   .split{transform:none}
 }
 
-.no-js .preloader{display:none}
+
+.form-hint{margin:0;font-size:.92rem;font-weight:500;color:var(--choc-2);overflow-wrap:anywhere}
+.form-hint b{color:var(--choc)}

@@ -16,6 +16,7 @@
   const sprite = id => `<svg viewBox="0 0 100 100" aria-hidden="true"><use href="#${id}"/></svg>`;
 
   html.classList.remove('no-js');
+  body.classList.add('is-loading');
 
   /* ---------------- tiny fx factory ---------------- */
   function fx(cls, inner, x, y) {
@@ -36,11 +37,12 @@
   function ready() {
     if (body.classList.contains('is-ready')) return;
     $('#preloader').classList.add('done');
-    body.classList.replace('is-loading', 'is-ready');
+    body.classList.remove('is-loading');
+    body.classList.add('is-ready');
     setTimeout(() => $('#preloader') && ($('#preloader').style.display = 'none'), 1400);
     initReveal();
   }
-  const minWait = new Promise(r => setTimeout(r, reduce ? 200 : 1700));
+  const minWait = new Promise(r => setTimeout(r, reduce ? 200 : 1300));
   const loaded = new Promise(r => (document.readyState === 'complete' ? r() : addEventListener('load', r)));
   const safety = new Promise(r => setTimeout(r, 4500));
   Promise.race([Promise.all([minWait, loaded]), safety]).then(ready);
@@ -341,29 +343,53 @@
     if (o) sel.value = o.value || o.text;
   }));
 
-  /* ---------------- booking form -> WhatsApp / email ---------------- */
-  const form = $('#bookForm'), errEl = $('#formErr');
-  function compose() {
+  /* ---------------- booking form -> WhatsApp link / copy ---------------- */
+  const form = $('#bookForm'), errEl = $('#formErr'), waBtn = $('#waBtn'), hint = $('#formHint');
+  function message() {
     const f = new FormData(form);
     const name = (f.get('name') || '').trim(), dog = (f.get('dog') || '').trim();
-    $$('input[name=name],input[name=dog]', form).forEach(i => i.classList.toggle('err', !i.value.trim()));
-    if (!name || !dog) { errEl.textContent = "Please add your name and your pooch's name 🐾"; return null; }
-    errEl.textContent = '';
     const when = (f.get('when') || '').trim() || 'flexible';
     const note = (f.get('note') || '').trim();
-    return `Hi Furry Pooch! 🐾 I'm ${name}. My pooch is ${dog} and we're looking for: ${f.get('service')}. Preferred day & time: ${when}.` + (note ? ` Note: ${note}` : '');
+    return { name, dog, text: `Hi Furry Pooch! 🐾 I'm ${name || '…'}. My pooch is ${dog || '…'} and we're looking for: ${f.get('service')}. Preferred day & time: ${when}.` + (note ? ` Note: ${note}` : '') };
   }
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const msg = compose(); if (!msg) return;
-    window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
-    toast('WOOF!');
-  });
-  $('#mailBtn').addEventListener('click', () => {
-    const msg = compose(); if (!msg) return;
-    location.href = `mailto:${EMAIL}?subject=${encodeURIComponent('Booking request for Furry Pooch')}&body=${encodeURIComponent(msg)}`;
+  function syncLink() { waBtn.href = `https://wa.me/${PHONE}?text=${encodeURIComponent(message().text)}`; }
+  function valid() {
+    const m = message();
+    $$('input[name=name],input[name=dog]', form).forEach(i => i.classList.toggle('err', !i.value.trim()));
+    if (!m.name || !m.dog) { errEl.textContent = "Please add your name and your pooch's name 🐾"; return false; }
+    errEl.textContent = ''; return true;
+  }
+  form.addEventListener('input', syncLink);
+  form.addEventListener('change', syncLink);
+  form.addEventListener('submit', e => { e.preventDefault(); });
+  waBtn.addEventListener('click', e => { syncLink(); if (!valid()) e.preventDefault(); else toast('WOOF!'); });
+  $('#copyBtn').addEventListener('click', async () => {
+    if (!valid()) return;
+    const text = message().text;
+    let ok = false;
+    try { await navigator.clipboard.writeText(text); ok = true; } catch (_) {
+      const t = document.createElement('textarea'); t.value = text; t.style.cssText = 'position:fixed;opacity:0';
+      document.body.appendChild(t); t.select();
+      try { ok = document.execCommand('copy'); } catch (_) {} t.remove();
+    }
+    hint.innerHTML = ok ? 'Copied! Paste it in a message to <b>+91 99407 27027</b> or <b>furrypooch2@gmail.com</b>.' : 'Select and copy this: <b></b>';
+    if (!ok) hint.querySelector('b').textContent = text;
+    if (ok) toast('COPIED!');
   });
   $$('input', form).forEach(i => i.addEventListener('input', () => i.classList.remove('err')));
+  syncLink();
+
+  /* ---------------- in-page links (reliable inside a sandboxed frame) ---------------- */
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const id = a.getAttribute('href').slice(1);
+    const t = id ? document.getElementById(id) : null;
+    if (id && !t) return;
+    e.preventDefault();
+    if (!t || id === 'top') scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    else t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+  });
 
   /* ---------------- footer ---------------- */
   $('#year').textContent = new Date().getFullYear();
