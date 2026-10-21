@@ -174,6 +174,27 @@ CATEGORIES = [
                 "desc": "A cheerful red polka-dot twirl dress with a cream satin bow at the waist and a ruffled skirt. Small pets look extra cute in it.",
                 "features": ["Red with white polka dots", "Cream satin bow at the waist", "Ruffled, gathered skirt", "Sleeveless, easy to wear"],
             },
+            {
+                "code": "FP-L06", "name": "Sherbet Stripe Bow Dress", "layout": "gallery", "cols": 3, "perks": False,
+                "row_h": [108, 82], "cover": "sherbet-stripe-bow-dress-m2.jpg",
+                "photos": [("sherbet-stripe-bow-dress-m1", ""), ("sherbet-stripe-bow-dress-m2", ""), ("sherbet-stripe-bow-dress-m3", ""), ("sherbet-stripe-bow-dress-spec", "", 3, 1)],
+                "desc": "A summery pastel-striped seersucker-style dress in pink, peach and lemon, with a big orange satin bow and a tiered ruffle skirt.",
+                "features": ["Pink, peach and lemon stripes", "Big orange satin bow", "Tiered ruffle skirt", "Buttons down the back"],
+            },
+            {
+                "code": "FP-L07", "name": "Gulabi Phool Bow Dress", "layout": "gallery", "cols": 3, "perks": False,
+                "row_h": [108, 82], "cover": "gulabi-phool-bow-dress-m2.jpg",
+                "photos": [("gulabi-phool-bow-dress-m1", ""), ("gulabi-phool-bow-dress-m2", ""), ("gulabi-phool-bow-dress-m3", ""), ("gulabi-phool-bow-dress-spec", "", 3, 1)],
+                "desc": "Little pink blossoms on white, with a big pink satin bow and a crystal centre. A sweet, swishy dress for spring days.",
+                "features": ["Pink blossom print on white", "Pink satin bow with crystal centre", "Gathered, swishy skirt", "Buttons down the back"],
+            },
+            {
+                "code": "FP-L08", "name": "Pista Phool Bow Dress", "layout": "gallery", "cols": 3, "perks": False,
+                "row_h": [108, 82], "cover": "pista-phool-bow-dress-m2.jpg",
+                "photos": [("pista-phool-bow-dress-m1", ""), ("pista-phool-bow-dress-m2", ""), ("pista-phool-bow-dress-m3", ""), ("pista-phool-bow-dress-spec", "", 3, 1)],
+                "desc": "Soft mint and peach flowers on white, with a sunny yellow satin bow and a crystal centre. Fresh, light and pretty.",
+                "features": ["Mint and peach floral print", "Yellow satin bow with crystal centre", "Gathered skirt, sleeveless", "Buttons down the back"],
+            },
         ],
     },
     {
@@ -234,6 +255,14 @@ CATEGORIES = [
                 "desc": "Office-ready neckties with a fun twist. Three prints: colourful paws on black, navy and gold stripes, and little corgi faces on sky blue.",
                 "features": ["Three prints to choose from", "Fits on a neat collar band", "Works for dogs and cats", "Matching look for the whole pack"],
             },
+            {
+                "code": "FP-B09", "name": "Tropical Bloom Bandana & Bow Tie Set", "layout": "gallery", "cols": 4, "perks": False,
+                "row_h": [88, 52, 52], "cover": "bloom-bandana-set-m2.jpg",
+                "photos": [("bloom-bandana-set-m1", ""), ("bloom-bandana-set-m2", ""), ("bloom-bandana-set-m3", ""), ("bloom-bandana-set-m4", ""),
+                           ("bloom-bandana-set-flat", "", 3, 2), ("bloom-bandana-set-close1", ""), ("bloom-bandana-set-close2", "")],
+                "desc": "A bold pink and black floral bandana with a bow tie on top. Choose a black or a red bow tie to match your pet's mood.",
+                "features": ["Pink, black and white floral bandana", "Red or black bow tie included", "Bow tie on an adjustable strap", "Printed on both sides"],
+            },
         ],
     },
     {
@@ -259,6 +288,15 @@ CATEGORIES = [
                 "photos": [("trail-harness-golden", ""), ("trail-harness-cat", ""), ("trail-harness-flat-top", ""), ("trail-harness-flat-bottom", "")],
                 "desc": "A lighter orange harness with a teal mesh chest panel, made to fit both dogs and cats. Easy to put on, hard to slip out of.",
                 "features": ["Orange body with teal mesh panel", "Adjustable buckle straps", "Back ring for the leash clip", "Shown on a Golden Retriever and a cat"],
+            },
+            {
+                "code": "FP-A04", "name": "Kitty Face Bell Collar", "layout": "gallery", "cols": 5, "perks": False,
+                "row_h": [98, 98], "col_t": "repeat(4,1fr) 38mm", "cover": "kitty-collar-ginger-blue.jpg",
+                "photos": [("kitty-collar-ragdoll-black", ""), ("kitty-collar-ginger-blue", ""), ("kitty-collar-tabby-green", ""), ("kitty-collar-calico-blue", ""),
+                           ("kitty-collar-strip", "", 1, 2),
+                           ("kitty-collar-ginger-black", ""), ("kitty-collar-tabby-blue", ""), ("kitty-collar-white-green", ""), ("kitty-collar-tuxedo-green", "")],
+                "desc": "A slim printed collar with a cute cat-face buckle and a shiny bell, in three colours that suit every kind of kitty.",
+                "features": ["Cat-face buckle", "Shiny jingle bell", "Three colours: grey-black, blue and lime green", "Printed webbing band"],
             },
         ],
     },
@@ -444,19 +482,33 @@ def page_trio(cat, p, n):
 
 def page_gallery(cat, p, n, idx):
     cols = p.get("cols", 3)
-    rows = -(-len(p["photos"]) // cols)
-    top, bottom = (62, 272) if not p.get("perks", True) else (74, 272)
-    h = (bottom - top - (rows - 1) * 4) / rows
-    tiles = "".join(
-        f'<div class="tile" style="height:{h:.1f}mm;transform:rotate({(-.5 if k % 2 == 0 else .5) * (1 if cols < 4 else .5)}deg)">'
-        f'<img class="photo" src="images/{f}.jpg">' + (f'<span class="cap">{escape(c)}</span>' if c else "") + '</div>'
-        for k, (f, c) in enumerate(p["photos"]))
+    top = 62 if not p.get("perks", True) else 74
+    row_h = p.get("row_h")
+    if row_h:
+        tmpl_rows = " ".join(f"{h}mm" for h in row_h)
+        tmpl_cols = p.get("col_t", f"repeat({cols},1fr)")
+        h_style = ""
+    else:
+        rows = -(-len(p["photos"]) // cols)
+        h = (272 - top - (rows - 1) * 4) / rows
+        tmpl_rows = ""
+        tmpl_cols = f"repeat({cols},1fr)"
+        h_style = f"height:{h:.1f}mm;"
+    tiles = ""
+    for k, ph in enumerate(p["photos"]):
+        f, c = ph[0], ph[1]
+        cs, rs = (ph[2], ph[3]) if len(ph) > 2 else (1, 1)
+        rot = 0 if (cs > 1 or rs > 1) else (-.5 if k % 2 == 0 else .5) * (1 if cols < 4 else .5)
+        span = f"grid-column:span {cs};grid-row:span {rs};" if (cs > 1 or rs > 1) else ""
+        tiles += (f'<div class="tile" style="{h_style}{span}transform:rotate({rot}deg)">'
+                  f'<img class="photo" src="images/{f}.jpg">' + (f'<span class="cap">{escape(c)}</span>' if c else "") + '</div>')
     perks = perks_html(58) if p.get("perks", True) else ""
     blob = [("soft", 150, -40, 100)] if idx % 2 == 0 else [("soft", -40, -50, 100)]
+    rows_css = f"grid-template-rows:{tmpl_rows};" if tmpl_rows else ""
     return (f'<section class="page grid gal">{blobs(blob)}{paw(190 if idx % 2 == 0 else 8, 3, 10, 15, "purple")}'
             f'<div class="head"><div class="l">{head_html(cat, p)}<h1>{escape(p["name"])}</h1><p class="desc">{escape(p["desc"])}</p></div>'
             f'<div class="r">{features_html(p["features"])}</div></div>{perks}'
-            f'<div class="gtiles" style="top:{top}mm;grid-template-columns:repeat({cols},1fr)">{tiles}</div>{foot(n)}</section>')
+            f'<div class="gtiles" style="top:{top}mm;grid-template-columns:{tmpl_cols};{rows_css}">{tiles}</div>{foot(n)}</section>')
 
 
 def page_twin(cat, p, n):
