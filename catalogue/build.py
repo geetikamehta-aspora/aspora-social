@@ -134,8 +134,7 @@ def block(cat, p, code, flip, top):
 def page_products(items, n):
     b = "".join(block(cat, p, code, i == 1, (11, 149)[i]) for i, (cat, p, code) in enumerate(items))
     pos = [[("soft", 150, -40, 100)], [("soft", -40, -50, 100)]][n % 2]
-    mid = paw(98, 141.5, 6, 20, "purple") + paw(106, 141.5, 6, -20, "purple") + paw(114, 141.5, 6, 20, "purple")
-    return f'<section class="page prod">{blobs(pos + [("deep", -40, 250, 80)])}{mid}{b}{foot(n)}</section>'
+    return f'<section class="page prod">{blobs(pos + [("deep", -40, 250, 80)])}{b}{foot(n)}</section>'
 
 
 def page_contents(rows, n):
