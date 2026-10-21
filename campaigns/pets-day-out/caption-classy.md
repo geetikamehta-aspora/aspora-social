@@ -2,7 +2,7 @@
 
 Fashion show ready? ✨
 
-We're coming soon to Pets Day Out — and we're bringing desi glam for dogs AND cats. Pick up their fashion-show outfit from the Furry Pooch stall: kurtas, sherwanis, lehenga frocks, bandanas & more.
+We're coming soon to Pets Day Out — and we're bringing desi glam for dogs AND cats. Pick up their fashion-show outfit from the Furry Pooch stall: kurta koti, sherwanis, lehenga dresses, bandanas & more.
 
 📅 24–25 October 2026
 📍 Wings Convention Centre, Kilpauk, Chennai
