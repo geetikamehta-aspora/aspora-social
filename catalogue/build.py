@@ -166,6 +166,14 @@ CATEGORIES = [
                 "features": ["Layered tulle skirt in cream, pink and lilac", "Silver satin bib with a glitter rose",
                              "Big satin bow at the back", "Bandana-style neckline"],
             },
+            {
+                "code": "FP-L05", "name": "Lal Polka Bow Frock", "layout": "gallery", "cols": 3,
+                "cover": "lal-polka-bow-frock-poodle.jpg",
+                "photos": [("lal-polka-bow-frock-ragdoll", ""), ("lal-polka-bow-frock-poodle", ""), ("lal-polka-bow-frock-kitten", ""),
+                           ("lal-polka-bow-frock-ragdoll-back", ""), ("lal-polka-bow-frock-poodle-back", ""), ("lal-polka-bow-frock-kitten-back", "")],
+                "desc": "A cheerful red polka-dot twirl dress with a cream satin bow at the waist and a ruffled skirt. Small pets look extra cute in it.",
+                "features": ["Red with white polka dots", "Cream satin bow at the waist", "Ruffled, gathered skirt", "Sleeveless, easy to wear"],
+            },
         ],
     },
     {
@@ -180,6 +188,51 @@ CATEGORIES = [
                 "desc": "A soft plaid collar with a scalloped white lace edge and a plaid bow fastened with a gold anchor button. Ties at the back with a white ribbon.",
                 "features": ["Plaid in sky blue or rose pink", "Scalloped white lace edge",
                              "Plaid bow with gold anchor button", "Soft white ribbon tie"],
+            },
+            {
+                "code": "FP-B02", "name": "Pari Plaid Ruffle Bow Collar", "layout": "gallery", "cols": 2,
+                "cover": "pari-plaid-ruffle-collar-blue-shih-tzu.jpg",
+                "photos": [("pari-plaid-ruffle-collar-blue-shih-tzu", ""), ("pari-plaid-ruffle-collar-blue-ragdoll", ""),
+                           ("pari-plaid-ruffle-collar-pink-shih-tzu", ""), ("pari-plaid-ruffle-collar-pink-ragdoll", "")],
+                "desc": "A frilly double-layer lace ruffle in plaid, finished with a big plaid bow and a gold button. Looks sweet on dogs and cats alike.",
+                "features": ["Plaid in sky blue or rose pink", "Double-layer white lace ruffle",
+                             "Plaid bow with gold button", "Shown on a Shih Tzu and a Ragdoll cat"],
+            },
+            {
+                "code": "FP-B03 / FP-B04", "name": "Satin & Velvet Bandanas", "layout": "twin",
+                "cover": "pearl-satin-bandana-golden.jpg",
+                "desc": "Two statement bandanas: a glossy pearl-silver one with a fabric rose, and a deep midnight one with a butterfly charm.",
+                "variants": [
+                    {"code": "FP-B03", "name": "Pearl Satin Rose Bandana", "photos": ["pearl-satin-bandana-golden", "pearl-satin-bandana-ragdoll"],
+                     "features": ["Glossy pearl-silver satin", "Fabric rose at the corner", "Classic triangle bandana"]},
+                    {"code": "FP-B04", "name": "Midnight Butterfly Bandana", "photos": ["velvet-butterfly-bandana-poodle", "velvet-butterfly-bandana-cat"],
+                     "features": ["Deep midnight-green fabric", "Colourful butterfly charm", "Classic triangle bandana"]},
+                ],
+            },
+            {
+                "code": "FP-B05 / FP-B06", "name": "Satin Bow Ties", "layout": "twin",
+                "cover": "satin-bow-tie-red-golden.jpg",
+                "desc": "Sharp little bow ties for your gentleman or lady. Pick a bold red satin or a classic black polka dot.",
+                "variants": [
+                    {"code": "FP-B05", "name": "Red Satin Bow Tie", "photos": ["satin-bow-tie-red-golden", "satin-bow-tie-red-cat"],
+                     "features": ["Shiny red satin", "Black centre knot", "Shown on a Golden Retriever and a cat"]},
+                    {"code": "FP-B06", "name": "Polka-Dot Bow Tie", "photos": ["satin-bow-tie-polka-poodle", "satin-bow-tie-polka-cat"],
+                     "features": ["Black with white polka dots", "Neat, structured bow", "Shown on a Poodle and a cat"]},
+                ],
+            },
+            {
+                "code": "FP-B07", "name": "Tuxedo Bow Tie", "layout": "top",
+                "hero": "tuxedo-bow-tie-hero.jpg", "pos": "center 40%", "sticker": "Dapper<br>duo!",
+                "desc": "A glossy black satin bow tie with a red centre knot. A tuxedo-style classic for every wedding, birthday and photo shoot.",
+                "features": ["Black satin bow", "Red satin centre knot", "Sized for small dogs and cats", "Shown on a Maltese and a Ragdoll cat"],
+            },
+            {
+                "code": "FP-B08", "name": "Pawty Neckties", "layout": "gallery", "cols": 3, "perks": False,
+                "cover": "pawty-necktie-paw-poodle.jpg",
+                "photos": [("pawty-necktie-paw-poodle", "Paw Party"), ("pawty-necktie-stripe-golden", "Classic Stripes"), ("pawty-necktie-corgi-corgi", "Corgi Cutie"),
+                           ("pawty-necktie-paw-ragdoll", "Paw Party"), ("pawty-necktie-stripe-tabby", "Classic Stripes"), ("pawty-necktie-corgi-ginger-cat", "Corgi Cutie")],
+                "desc": "Office-ready neckties with a fun twist. Three prints: colourful paws on black, navy and gold stripes, and little corgi faces on sky blue.",
+                "features": ["Three prints to choose from", "Fits on a neat collar band", "Works for dogs and cats", "Matching look for the whole pack"],
             },
         ],
     },
@@ -199,6 +252,27 @@ CATEGORIES = [
                 "desc": "A bright orange harness with a breathable teal mesh panel and adjustable buckle straps, made for walks that turn into adventures.",
                 "features": ["Bright orange body with breathable teal mesh panel", "Adjustable buckle straps at chest and sides",
                              "Top D-ring for the leash clip", "Contrast grey piping"],
+            },
+            {
+                "code": "FP-A03", "name": "Orange Trail Harness for Dogs & Cats", "layout": "gallery", "cols": 2, "perks": False,
+                "cover": "trail-harness-golden.jpg",
+                "photos": [("trail-harness-golden", ""), ("trail-harness-cat", ""), ("trail-harness-flat-top", ""), ("trail-harness-flat-bottom", "")],
+                "desc": "A lighter orange harness with a teal mesh chest panel, made to fit both dogs and cats. Easy to put on, hard to slip out of.",
+                "features": ["Orange body with teal mesh panel", "Adjustable buckle straps", "Back ring for the leash clip", "Shown on a Golden Retriever and a cat"],
+            },
+        ],
+    },
+    {
+        "name": "Cool Shades",
+        "blurb": "Retro round sunglasses in four juicy colours.",
+        "short": "Retro round sunglasses",
+        "products": [
+            {
+                "code": "FP-X01", "name": "Retro Round Sunglasses", "layout": "gallery", "cols": 4, "perks": False,
+                "cover": "retro-sunglasses-yellow-golden.jpg",
+                "photos": [(f"retro-sunglasses-{c}-{k}", (c.title() if k == "flat" else "")) for c in ("yellow", "purple", "black", "red") for k in ("shih-tzu", "cat", "golden", "flat")],
+                "desc": "Gold-rimmed round shades with tinted lenses, in four colours. Cool enough for the beach, the festival or the photo shoot.",
+                "features": ["Round gold-tone metal frame", "Yellow, purple, black and red lenses", "Shown on a Shih Tzu, a cat and a Golden Retriever"],
             },
         ],
     },
@@ -247,6 +321,10 @@ def img_of(p, which="cover"):
     return f'{p["prefix"]}-{p.get("models", MODELS)[0]}.jpg'
 
 
+def nprod(cat):
+    return sum(len(p.get("variants", [0])) for p in cat["products"])
+
+
 def count_label(n):
     return f'{n} design{"s" if n != 1 else ""}'
 
@@ -269,7 +347,7 @@ def page_cover():
 def page_contents(toc, n):
     rows = "".join(
         f'<div class="toc-row"><div class="no">{ci:02d}</div><div class="meta"><h3>{escape(CATEGORIES[ci-1]["name"])}</h3>'
-        f'<p>{escape(CATEGORIES[ci-1]["short"])} &middot; {count_label(len(CATEGORIES[ci-1]["products"]))}</p></div>'
+        f'<p>{escape(CATEGORIES[ci-1]["short"])} &middot; {count_label(nprod(CATEGORIES[ci-1]))}</p></div>'
         f'<div class="thumbs">{"".join(f"<img src=images/{img_of(p)}>" for p in CATEGORIES[ci-1]["products"][:3])}</div>'
         f'<div class="pg">p. {pg}</div></div>'
         for ci, pg in toc)
@@ -306,7 +384,7 @@ def page_divider(ci, cat, n):
             f'{paw(176, 20, 16, 16, "sun", .9)}{paw(158, 44, 11, -12, "sun", .9)}'
             f'<div class="bignum">{ci:02d}</div>'
             f'<div class="title"><span class="chip">Collection {ci:02d}</span><h1>{escape(cat["name"])}</h1><p>{escape(cat["blurb"])}</p>'
-            f'<div class="count"><span class="chip ghost">{count_label(len(cat["products"]))}</span></div></div>'
+            f'<div class="count"><span class="chip ghost">{count_label(nprod(cat))}</span></div></div>'
             f'<div class="arches" style="bottom:22mm;gap:6mm">{thumbs}</div>{foot(n, True)}</section>')
 
 
@@ -364,6 +442,34 @@ def page_trio(cat, p, n):
             f'{sticker("Let&rsquo;s<br>go!", 14, 218, 32, -10, "round sun")}{foot(n)}</section>')
 
 
+def page_gallery(cat, p, n, idx):
+    cols = p.get("cols", 3)
+    rows = -(-len(p["photos"]) // cols)
+    top, bottom = (62, 272) if not p.get("perks", True) else (74, 272)
+    h = (bottom - top - (rows - 1) * 4) / rows
+    tiles = "".join(
+        f'<div class="tile" style="height:{h:.1f}mm;transform:rotate({(-.5 if k % 2 == 0 else .5) * (1 if cols < 4 else .5)}deg)">'
+        f'<img class="photo" src="images/{f}.jpg">' + (f'<span class="cap">{escape(c)}</span>' if c else "") + '</div>'
+        for k, (f, c) in enumerate(p["photos"]))
+    perks = perks_html(58) if p.get("perks", True) else ""
+    blob = [("soft", 150, -40, 100)] if idx % 2 == 0 else [("soft", -40, -50, 100)]
+    return (f'<section class="page grid gal">{blobs(blob)}{paw(190 if idx % 2 == 0 else 8, 3, 10, 15, "purple")}'
+            f'<div class="head"><div class="l">{head_html(cat, p)}<h1>{escape(p["name"])}</h1><p class="desc">{escape(p["desc"])}</p></div>'
+            f'<div class="r">{features_html(p["features"])}</div></div>{perks}'
+            f'<div class="gtiles" style="top:{top}mm;grid-template-columns:repeat({cols},1fr)">{tiles}</div>{foot(n)}</section>')
+
+
+def page_twin(cat, p, n):
+    cols = ""
+    for v in p["variants"]:
+        ph = "".join(f'<div class="tile"><img class="photo" src="images/{f}.jpg"></div>' for f in v["photos"])
+        cols += (f'<div class="vcol"><div class="vhead"><span class="code">{v["code"]}</span><h2>{escape(v["name"])}</h2></div>'
+                 f'<div class="vphotos">{ph}</div>{features_html(v["features"])}</div>')
+    return (f'<section class="page grid twin">{blobs([("soft", 150, -40, 100), ("deep", -40, 240, 90)])}{paw(190, 3, 10, 15, "purple")}'
+            f'<div class="head"><div class="l"><span class="chip">{escape(cat["name"])}</span><h1>{escape(p["name"])}</h1>'
+            f'<p class="desc">{escape(p["desc"])}</p></div></div><div class="vcols">{cols}</div>{foot(n)}</section>')
+
+
 def page_closing():
     rows = [("phone", f"Call {CONTACT_NAME}", PHONE), ("insta", "Instagram", HANDLE), ("mail", "Email", EMAIL)]
     r = "".join(f'<div class="crow"><i>{ICONS[i]}</i><div><small>{l}</small><span>{escape(t)}</span></div></div>' for i, l, t in rows)
@@ -404,6 +510,7 @@ def build():
             cat = CATEGORIES[item[1] - 1]; p = cat["products"][item[2]]
             lay = p["layout"]
             out.append(page_top(cat, p, n) if lay == "top" else page_collar(cat, p, n) if lay == "collar"
+                       else page_gallery(cat, p, n, n) if lay == "gallery" else page_twin(cat, p, n) if lay == "twin"
                        else page_trio(cat, p, n) if lay == "trio" else page_grid(cat, p, n, n))
     doc = ('<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Furry Pooch Catalogue</title>'
            '<link rel="stylesheet" href="assets/fonts.css"><link rel="stylesheet" href="styles.css"></head><body>'
