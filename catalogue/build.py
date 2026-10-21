@@ -124,7 +124,7 @@ CATEGORIES = [
 def block(cat, p, code, flip, top):
     imgs = p["imgs"]
     main = f'<div class="mainimg"><img src="images/{imgs[0][0]}" style="object-position:{imgs[0][1]}"></div>'
-    ins = f'<div class="insetimg"><img src="images/{imgs[1][0]}" style="object-position:{imgs[1][1]}"></div>' if len(imgs) > 1 else ""
+    ins = ""  # round second-photo inset removed; the second photo in each P(...) is kept in the data in case it is wanted again
     pts = "".join(f"<li>{PAW}<span>{escape(t)}</span></li>" for t in p["pts"])
     return (f'<div class="blk{" flip" if flip else ""}" style="top:{top}mm"><div class="imgs">{main}{ins}<div class="codebadge">{code}</div></div>'
             f'<div class="txt"><span class="chip">{escape(cat)}</span><h2>{escape(p["name"])}</h2>'
