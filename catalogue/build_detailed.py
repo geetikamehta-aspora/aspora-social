@@ -478,8 +478,8 @@ def page_cover():
             f'{paw(168, 14, 14, 18, "purple")}{paw(184, 30, 10, -12, "purple")}'
             f'<img class="logo" src="assets/logo-brown.png" alt="Furry Pooch">'
             f'{sticker("Festive<br>Edit", 11, 12, 33, -12, "round")}'
-            f'<div class="pill">The Ethnic Wear Collection</div>'
-            f'<div class="sub">Festive outfits for dogs &amp; cats</div>'
+            f'<div class="pill">Our Collection</div>'
+            f'<div class="sub">Clothes &amp; Accessories</div>'
             f'{trail(walk, 8.5, "purple")}<div class="arches">{a}</div></section>')
 
 
