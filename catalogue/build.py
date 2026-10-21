@@ -34,10 +34,6 @@ CATEGORIES = [
           ["Floral and paisley print", "Chest pocket and pocket square", "Soft blue lining"], "phoolwari-pocket-kurta-golden-retriever.jpg", "phoolwari-pocket-kurta-front.jpg"),
         P("Gulabi Patta Gota Kurta", "Bright pink kurta with a red leaf print and gold gota lace.",
           ["Red leaf print on pink", "Gold gota lace trim", "Stand collar, centre placket"], "gulabi-patta-kurta-poodle.jpg", "gulabi-patta-kurta-front.jpg"),
-        P("Firoza Pocket Kurta", "Turquoise kurta with embroidered-print blooms and a red pocket square.",
-          ["Coral, pink and gold blooms", "Chest pocket", "Short sleeves, turquoise lining"], "firoza-pocket-kurta-shih-tzu.jpg", "firoza-pocket-kurta-front.jpg"),
-        P("Firoza Bloom Kurta", "The turquoise garden in a button-placket cut with a gold-edged collar.",
-          ["Gold-edged stand collar", "Short sleeves", "Easy leg openings"], "firoza-bloom-kurta-shih-tzu.jpg", "firoza-bloom-kurta-front.jpg"),
     ]),
     ("Sherwanis & Suits", "Sherwanis & tuxedo suits", [
         P("Gulaal Sequin Sherwani", "Dusty-rose sherwani sprinkled with gold sequin motifs.",
@@ -54,8 +50,6 @@ CATEGORIES = [
           ["Gold floral border", "Gold waist band", "Flared skirt for twirling"], ("ruby-lehenga-frock.jpg", "center 55%")),
         P("Jamuni Double-Layer Frock", "Deep-purple twirl dress with two ruffled tiers and gold lace.",
           ["Gold gota lace trim", "Chevron bodice, tie-up neck", "Double-layer ruffle skirt"], "jamuni-frock-golden-retriever.jpg", "jamuni-frock-front.jpg"),
-        P("Lal Pari Bow Frock", "Red party frock with gold motifs, a waist bow and tassels.",
-          ["Gold-lace hem", "Waist bow with golden tassels", "Sleeveless, gathered skirt"], "lal-pari-bow-frock-shih-tzu.jpg", "lal-pari-bow-frock-front.jpg"),
         P("Indradhanush Tutu Dress", "Rainbow tulle tiers with a silver satin bib, rose and bow.",
           ["Layered tulle skirt", "Silver satin bib, glitter rose", "Big satin bow at the back"], "rainbow-tutu-dress-golden.jpg", "rainbow-tutu-dress-rose.jpg"),
         P("Lal Polka Bow Frock", "Red polka-dot twirl dress with a cream satin bow.",
@@ -70,8 +64,6 @@ CATEGORIES = [
     ("Bows & Bandanas", "Lace collars, bows, ties & bandanas", [
         P("Sailor Plaid Lace Collar", "Plaid collar with scalloped white lace and a gold anchor button.",
           ["Sky blue or rose pink", "Scalloped lace edge", "Soft white ribbon tie"], ("plaid-lace-collar-hero.jpg", "center 30%"), "plaid-lace-collar-flat-pink.jpg"),
-        P("Pari Plaid Ruffle Bow Collar", "Double-layer lace ruffle in plaid with a big bow and gold button.",
-          ["Sky blue or rose pink", "Double-layer lace ruffle", "Plaid bow, gold button"], "pari-plaid-ruffle-collar-blue-shih-tzu.jpg", "pari-plaid-ruffle-collar-pink-shih-tzu.jpg"),
         P("Pearl Satin Rose Bandana", "Glossy pearl-silver satin bandana with a fabric rose.",
           ["Pearl-silver satin", "Fabric rose at the corner", "Classic triangle shape"], "pearl-satin-bandana-golden.jpg", "pearl-satin-bandana-ragdoll.jpg"),
         P("Midnight Butterfly Bandana", "Deep midnight bandana with a colourful butterfly charm.",
