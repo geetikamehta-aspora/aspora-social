@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Furry Pooch x Pets Day Out — Classy (1080x1350)</title>
+<style>
+  @font-face { font-family: "Playfair"; font-weight: 600; font-style: normal; src: url("assets/fonts/playfair-display-normal-600.ttf"); }
+  @font-face { font-family: "Playfair"; font-weight: 700; font-style: normal; src: url("assets/fonts/playfair-display-normal-700.ttf"); }
+  @font-face { font-family: "Playfair"; font-weight: 600; font-style: italic; src: url("assets/fonts/playfair-display-italic-600.ttf"); }
+  @font-face { font-family: "Poppins";  font-weight: 500; src: url("assets/fonts/poppins-normal-500.ttf"); }
+  @font-face { font-family: "Poppins";  font-weight: 600; src: url("assets/fonts/poppins-600.ttf"); }
+
+  :root {
+    --plum-dk: #1f0b38;
+    --plum:    #34145a;
+    --magenta: #b8337f;
+    --gold:    #f4b73f;
+    --gold-lt: #ffd77a;
+    --cream:   #fff4e0;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #12061f; }
+
+  #post {
+    position: relative; width: 1080px; height: 1350px; overflow: hidden; color: var(--cream);
+    font-family: "Poppins", sans-serif;
+    background:
+      radial-gradient(ellipse 620px 520px at 14% 96%, rgba(184,51,127,.55), rgba(184,51,127,0) 70%),
+      radial-gradient(ellipse 640px 540px at 92% 8%,  rgba(184,51,127,.38), rgba(184,51,127,0) 70%),
+      radial-gradient(ellipse 560px 480px at 50% 58%, rgba(244,183,63,.30), rgba(244,183,63,0) 72%),
+      linear-gradient(170deg, var(--plum) 0%, var(--plum-dk) 100%);
+  }
+  /* fine gold inset frame */
+  #post::before {
+    content: ""; position: absolute; inset: 28px; border: 1.5px solid rgba(244,183,63,.55);
+    border-radius: 6px; pointer-events: none; z-index: 5;
+  }
+  .abs { position: absolute; }
+  .center { left: 0; right: 0; text-align: center; }
+
+  /* ---- brand row ---- */
+  #brands { top: 78px; display: flex; align-items: center; justify-content: center; gap: 38px; }
+  #brands img { display: block; }
+  #brands .fp  { height: 80px; }
+  #brands .pdo { height: 88px; }
+  #brands .bar { width: 1.5px; height: 62px; background: rgba(244,183,63,.7); }
+
+  /* ---- type ---- */
+  #eyebrow {
+    top: 206px; font: 600 21px/1 "Poppins"; letter-spacing: 8px; color: var(--gold); text-transform: uppercase;
+    padding-left: 8px;
+  }
+  #eyebrow::before, #eyebrow::after {
+    content: ""; display: inline-block; width: 54px; height: 1.5px; background: var(--gold);
+    vertical-align: middle; margin: 0 22px 3px;
+  }
+  #h1 { top: 252px; font: 700 92px/1.04 "Playfair"; color: var(--cream); letter-spacing: -.5px; }
+  #h2 { top: 366px; font: italic 600 62px/1.1 "Playfair"; color: var(--gold-lt); }
+  #lede {
+    top: 458px; font: 500 25px/1.55 "Poppins"; color: rgba(255,244,224,.86); letter-spacing: .3px;
+  }
+  #lede b { font-weight: 600; color: var(--cream); }
+
+  /* ---- arches ---- */
+  .arch {
+    position: absolute; width: 292px; border: 2px solid var(--gold); padding: 11px;
+    border-radius: 146px 146px 6px 6px; background: rgba(31,11,56,.35);
+    box-shadow: 0 26px 50px rgba(0,0,0,.35);
+  }
+  .arch .in { width: 100%; height: 100%; overflow: hidden; border-radius: 135px 135px 2px 2px; }
+  .arch img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  #a-left   { left: 82px;  top: 632px; height: 410px; }
+  #a-mid    { left: 394px; top: 584px; height: 458px; width: 292px; }
+  #a-right  { left: 706px; top: 632px; height: 410px; }
+  .tag {
+    position: absolute; z-index: 4; bottom: -17px; left: 50%; transform: translateX(-50%);
+    background: var(--cream); color: var(--plum); border-radius: 999px; padding: 9px 22px;
+    font: 600 15px/1 "Poppins"; letter-spacing: 2.5px; text-transform: uppercase; white-space: nowrap;
+    box-shadow: 0 6px 16px rgba(0,0,0,.3);
+  }
+  #a-mid .tag { background: var(--gold); }
+
+  /* ---- info ---- */
+  #info { top: 1098px; display: flex; justify-content: center; align-items: stretch; }
+  #info .col { padding: 0 46px; text-align: left; }
+  #info .sep { width: 1.5px; background: rgba(244,183,63,.7); }
+  #info .k { font: 600 15px/1 "Poppins"; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; }
+  #info .v { margin-top: 12px; font: 700 40px/1.08 "Playfair"; color: var(--cream); }
+  #info .v small { display: block; margin-top: 6px; font: 500 20px/1.3 "Poppins"; color: rgba(255,244,224,.8); letter-spacing: .5px; }
+
+  #sign { top: 1236px; font: italic 600 40px/1 "Playfair"; color: var(--cream); }
+  #sign span { color: var(--gold); }
+  #handle { top: 1290px; font: 600 19px/1 "Poppins"; letter-spacing: 5px; color: var(--gold); text-transform: uppercase; padding-left: 5px; }
+
+  /* sparkles */
+  svg.deco { position: absolute; left: 0; top: 0; width: 1080px; height: 1350px; z-index: 1; }
+</style>
+</head>
+<body>
+<div id="post">
+  <svg class="deco" viewBox="0 0 1080 1350" id="deco"></svg>
+
+  <div class="abs center" id="brands">
+    <img class="fp"  src="assets/logos/furry-pooch-cream.png" alt="Furry Pooch">
+    <div class="bar"></div>
+    <img class="pdo" src="assets/logos/pdo-white.png" alt="Pets Day Out">
+  </div>
+
+  <div class="abs center" id="eyebrow">Coming soon to Pets Day Out</div>
+  <div class="abs center" id="h1">Fashion show ready?</div>
+  <div class="abs center" id="h2">Desi glam for dogs &amp; cats</div>
+  <div class="abs center" id="lede">Get their fashion-show outfit from the <b>Furry Pooch stall</b><br>Kurtas, sherwanis, lehenga frocks &amp; more &mdash; for dogs and cats.</div>
+
+  <div class="arch" id="a-left"><div class="in"><img src="assets/photos/golden-rangeela-kurta.jpg" style="object-position:52% 50%" alt=""></div><div class="tag">Kurtas</div></div>
+  <div class="arch" id="a-mid"><div class="in"><img src="assets/photos/cat-floral-kurta.jpg" style="object-position:50% 42%" alt=""></div><div class="tag">For cats too</div></div>
+  <div class="arch" id="a-right"><div class="in"><img src="assets/photos/golden-red-frock.jpg" style="object-position:50% 50%" alt=""></div><div class="tag">Lehenga frocks</div></div>
+
+  <div class="abs center" id="info">
+    <div class="col"><div class="k">Save the date</div><div class="v">24&ndash;25 October<small>2026 &nbsp;&middot;&nbsp; Two days</small></div></div>
+    <div class="sep"></div>
+    <div class="col"><div class="k">Venue</div><div class="v">Wings Convention Centre<small>Kilpauk, Chennai &nbsp;&middot;&nbsp; Star Night Fest</small></div></div>
+  </div>
+
+  <div class="abs center" id="sign">See you all there<span>.</span></div>
+  <div class="abs center" id="handle">@furry.pooch</div>
+</div>
+
+<script>
+  const NS = "http://www.w3.org/2000/svg";
+  const deco = document.getElementById("deco");
+  const spark = (x, y, s, op) => {
+    const p = document.createElementNS(NS, "path");
+    p.setAttribute("d", "M0-30 C3-8 8-3 30 0 C8 3 3 8 0 30 C-3 8 -8 3 -30 0 C-8-3 -3-8 0-30Z");
+    p.setAttribute("transform", `translate(${x} ${y}) scale(${s})`);
+    p.setAttribute("fill", "#f4b73f"); p.setAttribute("opacity", op);
+    deco.appendChild(p);
+  };
+  [[104, 560, .38, .8], [980, 560, .3, .6], [70, 760, .26, .0]]
+    .forEach(a => spark(...a));
+</script>
+</body>
+</html>
