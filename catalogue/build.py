@@ -100,8 +100,6 @@ CATEGORIES = [
           ["Five colours", "Snap-buckle closure", "Jingle-bell charm"], ("collar-full.jpg", "center", 110, 84)),
         P("Orange Adventure Dog Harness", "Bright orange harness with a breathable teal mesh panel.",
           ["Adjustable buckle straps", "Top D-ring for the leash", "Grey contrast piping"], "harness-front.jpg", "harness-side.jpg"),
-        P("Orange Trail Harness", "A lighter orange harness with a teal mesh panel, for dogs and cats.",
-          ["Adjustable buckle straps", "Back ring for the leash", "Fits dogs and cats"], "trail-harness-golden.jpg", "trail-harness-flat-top.jpg"),
         P("Kitty Face Bell Collar", "Slim printed collar with a cat-face buckle and a shiny bell.",
           ["Grey-black, blue or lime green", "Cat-face buckle", "Jingle bell"], ("kitty-collar-composite.jpg", "center", 110, 128)),
         P("Lime Mesh Comfort Harness", "Lightweight lime-green mesh vest harness for cats and small dogs.",
@@ -138,7 +136,8 @@ def block(cat, p, code, flip, top):
 
 
 def page_products(items, n):
-    b = "".join(block(cat, p, code, i == 1, (11, 149)[i]) for i, (cat, p, code) in enumerate(items))
+    tops = (11, 149) if len(items) == 2 else (84,)
+    b = "".join(block(cat, p, code, i == 1, tops[i]) for i, (cat, p, code) in enumerate(items))
     pos = [[("soft", 150, -40, 100)], [("soft", -40, -50, 100)]][n % 2]
     return f'<section class="page prod">{blobs(pos + [("deep", -40, 250, 80)])}{b}{foot(n)}</section>'
 
