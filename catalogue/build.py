@@ -23,7 +23,7 @@ def tile_size(img):
 CATEGORIES = [
     ("Pet Kurtas", "Embroidered, mirror-work & multi-print kurtas", [
         P("Phool Bagh Floral Kurta", "Aqua-teal kurta with coral, pink and gold floral embroidery.",
-          ["Floral embroidery all over", "Gold thread on collar and sleeves", "Stand collar, short sleeves"], ("teal-floral-kurta.jpg", "center 22%")),
+          ["Floral embroidery all over", "Gold thread on collar and sleeves", "Stand collar, short sleeves"], ("teal-floral-kurta.jpg", "center 22%"), "teal-kurta-detail.jpg"),
         P("Aasmani Mirror-Work Kurta", "Sky-blue kurta with gold stars and hand-finished mirror borders.",
           ["Mirror, sequin and thread borders", "Mandarin collar, centre placket", "Flared sleeves, embroidered cuffs"], "sky-golden-retriever.jpg", "sky-flatlay-front.jpg"),
         P("Rangeela Jacket Kurta Set", "A multi-print ethnic jacket layered over a hot-pink kurta.",
@@ -47,7 +47,7 @@ CATEGORIES = [
     ]),
     ("Pet Lehengas & Frocks", "Festive lehenga dresses & frocks", [
         P("Ruby Zari Lehenga Dress", "Ruby brocade lehenga dress with gold zari and a pearl-bead hem.",
-          ["Gold floral border", "Gold waist band", "Flared skirt for twirling"], ("ruby-lehenga-frock.jpg", "center 55%")),
+          ["Gold floral border", "Gold waist band", "Flared skirt for twirling"], ("ruby-lehenga-frock.jpg", "center 55%"), "ruby-lehenga-detail.jpg"),
         P("Jamuni Double-Layer Frock", "Deep-purple twirl dress with two ruffled tiers and gold lace.",
           ["Gold gota lace trim", "Chevron bodice, tie-up neck", "Double-layer ruffle skirt"], "jamuni-frock-golden-retriever.jpg", "jamuni-frock-front.jpg"),
         P("Indradhanush Tutu Dress", "Rainbow tulle tiers with a silver satin bib, rose and bow.",
@@ -73,7 +73,7 @@ CATEGORIES = [
         P("Polka-Dot Bow Tie", "Black bow tie with crisp white polka dots.",
           ["Black with white dots", "Neat, structured bow", "For dogs and cats"], "satin-bow-tie-polka-poodle.jpg", "satin-bow-tie-polka-cat.jpg"),
         P("Tuxedo Bow Tie", "Glossy black satin bow tie with a red centre knot.",
-          ["Black satin bow", "Red satin centre knot", "Made for weddings and photo shoots"], ("tuxedo-bow-tie-hero.jpg", "center 40%")),
+          ["Black satin bow", "Red satin centre knot", "Made for weddings and photo shoots"], ("tuxedo-bow-tie-hero.jpg", "center 40%"), "tuxedo-bow-detail.jpg"),
         P("Pawty Neckties", "Fun neckties in paw, stripe and corgi prints.",
           ["Three prints to pick from", "Neat collar band", "For dogs and cats"], "pawty-necktie-paw-poodle.jpg", "pawty-necktie-stripe-golden.jpg"),
         P("Tropical Bloom Bandana & Bow Tie Set", "Pink and black floral bandana with a red or black bow tie.",
@@ -111,7 +111,7 @@ CATEGORIES = [
     ]),
     ("Pet Tees", "Printed tees", [
         P("Dungaree-Print Pet Tee", "White sleeveless tee with a printed dungaree design.",
-          ["Gold buckle prints", "Front pocket graphic", "Easy to slip on"], "overalls-tee-cat.jpg"),
+          ["Gold buckle prints", "Front pocket graphic", "Easy to slip on"], "overalls-tee-cat.jpg", "tee-print-detail.jpg"),
     ]),
 ]
 
