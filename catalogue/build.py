@@ -263,12 +263,36 @@ CATEGORIES = [
                 "desc": "A bold pink and black floral bandana with a bow tie on top. Choose a black or a red bow tie to match your pet's mood.",
                 "features": ["Pink, black and white floral bandana", "Red or black bow tie included", "Bow tie on an adjustable strap", "Printed on both sides"],
             },
+            {
+                "code": "FP-B10", "name": "Tuxedo Bandana, Midnight Black", "layout": "gallery", "cols": 4, "perks": False,
+                "row_h": [88, 52, 52], "cover": "tux-black-m2.jpg",
+                "photos": [("tux-black-m1", ""), ("tux-black-m2", ""), ("tux-black-m3", ""), ("tux-black-m4", ""),
+                           ("tux-black-flat", "", 3, 2), ("tux-black-c1", ""), ("tux-black-c2", "")],
+                "desc": "Black-tie for pets: a black bandana with a crisp white shirt front, two buttons and a black bow tie, on a grey adjustable collar strap.",
+                "features": ["Black bandana with white shirt front", "Two button details", "Black bow tie", "Grey strap with buckle and D-ring"],
+            },
+            {
+                "code": "FP-B11", "name": "Tuxedo Bandana, Black & Red", "layout": "gallery", "cols": 4, "perks": False, "inset": 22,
+                "row_h": [109, 50, 34], "cover": "tux-redblack-m1.jpg",
+                "photos": [("tux-redblack-hero", "", 4, 1), ("tux-redblack-flats", "", 4, 1),
+                           ("tux-redblack-m1", ""), ("tux-redblack-m2", ""), ("tux-redblack-m3", ""), ("tux-redblack-m4", "")],
+                "desc": "The tuxedo bandana in two bold colourways: black with a red bow, and red with a black bow. For dogs and cats.",
+                "features": ["Black with red bow, or red with black bow", "Soft and comfortable", "Adjustable neck strap", "Perfect for parties and photos"],
+            },
+            {
+                "code": "FP-B12", "name": "Tuxedo Bandana, Sky Blue & Plaid", "layout": "gallery", "cols": 4, "perks": False, "inset": 22,
+                "row_h": [116, 50, 36], "cover": "tux-blueplaid-m2.jpg",
+                "photos": [("tux-blueplaid-hero", "", 4, 1), ("tux-blueplaid-flats", "", 4, 1),
+                           ("tux-blueplaid-m1", ""), ("tux-blueplaid-m2", ""), ("tux-blueplaid-m3", ""), ("tux-blueplaid-m4", "")],
+                "desc": "Notched-lapel tuxedo bandanas in sky blue with a pink gingham bow, red with a black bow, and grey plaid with a red bow.",
+                "features": ["Sky blue with pink gingham bow", "Grey plaid with red bow", "Red with black bow", "Adjustable neck strap"],
+            },
         ],
     },
     {
         "name": "Collars & Harnesses",
-        "blurb": "Frilly bell collars and an adventure-ready harness to finish the look.",
-        "short": "Ruffle bell collars & harnesses",
+        "blurb": "Frilly bell collars, adventure-ready harnesses and a sturdy leash to finish the look.",
+        "short": "Bell collars, harnesses & leash",
         "products": [
             {
                 "code": "FP-A01", "name": "Ruffle Bell Collar", "layout": "collar", "cover": "collar-hero.jpg",
@@ -297,6 +321,24 @@ CATEGORIES = [
                            ("kitty-collar-ginger-black", ""), ("kitty-collar-tabby-blue", ""), ("kitty-collar-white-green", ""), ("kitty-collar-tuxedo-green", "")],
                 "desc": "A slim printed collar with a cute cat-face buckle and a shiny bell, in three colours that suit every kind of kitty.",
                 "features": ["Cat-face buckle", "Shiny jingle bell", "Three colours: grey-black, blue and lime green", "Printed webbing band"],
+            },
+            {
+                "code": "FP-A05", "name": "Lime Mesh Comfort Harness", "layout": "gallery", "cols": 12, "perks": False, "inset": 22,
+                "row_h": [115, 32, 55], "cover": "mesh-harness-hero.jpg",
+                "photos": [("mesh-harness-hero", "", 12, 1), ("mesh-harness-strip", "", 12, 1),
+                           ("mesh-harness-cat", "", 4, 1), ("mesh-harness-dog", "", 4, 1), ("mesh-harness-3d", "", 4, 1)],
+                "desc": "A lightweight vest harness with breathable lime-green mesh, made for cats and small dogs. Easy to adjust, comfy to wear.",
+                "features": ["Lightweight and comfortable", "Secure and adjustable straps", "Breathable mesh fabric", "Strong D-ring and secure buckle"],
+            },
+            {
+                "code": "FP-A06", "name": "Premium Rope Leash", "layout": "gallery", "cols": 12, "perks": False, "inset": 22,
+                "row_h": [84, 28, 24, 36], "cover": "rope-leash-hero.jpg",
+                "photos": [("rope-leash-rolls", "", 4, 1), ("rope-leash-hero", "", 8, 1),
+                           ("rope-leash-d1", "Soft foam handle", 3, 1), ("rope-leash-d2", "Reflective rope", 3, 1),
+                           ("rope-leash-d3", "Heavy-duty hook", 3, 1), ("rope-leash-d4", "Reinforced joint", 3, 1),
+                           ("rope-leash-colours", "", 12, 1), ("rope-leash-cat", "", 6, 1), ("rope-leash-dog", "", 6, 1)],
+                "desc": "A strong braided rope leash with a padded foam handle and reflective threads for night walks. For cats and small to medium dogs.",
+                "features": ["Strong and durable rope", "Comfortable foam handle", "Reflective design for night visibility", "360-degree rotating, rust-resistant metal hook"],
             },
         ],
     },
@@ -508,7 +550,7 @@ def page_gallery(cat, p, n, idx):
     return (f'<section class="page grid gal">{blobs(blob)}{paw(190 if idx % 2 == 0 else 8, 3, 10, 15, "purple")}'
             f'<div class="head"><div class="l">{head_html(cat, p)}<h1>{escape(p["name"])}</h1><p class="desc">{escape(p["desc"])}</p></div>'
             f'<div class="r">{features_html(p["features"])}</div></div>{perks}'
-            f'<div class="gtiles" style="top:{top}mm;grid-template-columns:{tmpl_cols};{rows_css}">{tiles}</div>{foot(n)}</section>')
+            f'<div class="gtiles" style="top:{top}mm;left:{p.get("inset", 12)}mm;right:{p.get("inset", 12)}mm;grid-template-columns:{tmpl_cols};{rows_css}">{tiles}</div>{foot(n)}</section>')
 
 
 def page_twin(cat, p, n):
