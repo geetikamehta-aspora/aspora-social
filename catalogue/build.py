@@ -112,6 +112,8 @@ CATEGORIES = [
     ("Pet Tees", "Printed tees", [
         P("Dungaree-Print Pet Tee", "White sleeveless tee with a printed dungaree design.",
           ["Gold buckle prints", "Front pocket graphic", "Easy to slip on"], "overalls-tee-cat.jpg", "tee-print-detail.jpg"),
+        P("Elephant Pet T-Shirt", "Soft white tee with a hand-painted elephant wearing a purple bow.",
+          ["Soft, breathable fabric", "Easy to wash and durable", "Comfortable neck, stretchy fit"], ("tshirt-elephant-pets.jpg", "center", 110, 106), "tshirt-elephant-front.jpg"),
     ]),
 ]
 
