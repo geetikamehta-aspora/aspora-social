@@ -77,6 +77,30 @@ CATEGORIES = [
                 "features": ["Floral and paisley print on sky blue", "Chest pocket with mustard pocket square",
                              "Stand collar, short sleeves", "Soft blue lining, curved hem"],
             },
+            {
+                "code": "FP-K06", "name": "Gulabi Patta Gota Kurta", "layout": "grid", "prefix": "gulabi-patta-kurta", "mosaic": True, "big_pos": "center 15%",
+                "models": ["poodle", "pomeranian", "dachshund"],
+                "details": [("ragdoll-cat", ""), ("front", "Front"), ("collar", "Gota-lace collar"), ("back", "Back")],
+                "desc": "Bright pink with a bold red leaf print, edged in gold zig-zag gota lace along the collar, placket and sleeves.",
+                "features": ["Pink base with red leaf print", "Gold gota lace on collar, placket and sleeves",
+                             "Stand collar with centre placket", "Curved hem, easy leg openings"],
+            },
+            {
+                "code": "FP-K07", "name": "Firoza Pocket Kurta", "layout": "grid", "prefix": "firoza-pocket-kurta",
+                "models": ["shih-tzu", "dachshund", "ragdoll-cat", "tabby-cat", "persian-cat", "pomeranian"],
+                "details": [("front", "Front"), ("pocket-flat", "Pocket"), ("back", "Back")],
+                "desc": "A turquoise kurta alive with embroidered-print blooms in coral, pink and gold, with a little chest pocket and a red pocket square.",
+                "features": ["Turquoise base with floral embroidery print", "Chest pocket with red pocket square",
+                             "Stand collar, short sleeves", "Matching turquoise lining, curved hem"],
+            },
+            {
+                "code": "FP-K08", "name": "Firoza Bloom Kurta", "layout": "grid", "prefix": "firoza-bloom-kurta",
+                "models": ["shih-tzu", "ragdoll-cat", "golden-puppy", "tabby-cat", "pomeranian", "bengal-cat"],
+                "details": [("front", "Front"), ("back", "Back"), ("maltese", "")],
+                "desc": "The same turquoise garden in a button-placket cut, with gold-edged collar and sleeves. Shown on small and big pets alike.",
+                "features": ["Turquoise base with coral, pink and gold blooms", "Gold-edged stand collar with placket",
+                             "Short sleeves, turquoise lining", "Curved hem, easy leg openings"],
+            },
         ],
     },
     {
@@ -133,6 +157,29 @@ CATEGORIES = [
                 "desc": "A red party frock scattered with tiny gold motifs, with a gold-lace hem and a bow tied at the waist, finished with golden tassels.",
                 "features": ["Red fabric with gold dot motifs", "Gold lace along the hem and neckline",
                              "Waist bow with golden tassels", "Full gathered skirt, sleeveless"],
+            },
+            {
+                "code": "FP-L04", "name": "Indradhanush Tutu Dress", "layout": "grid", "prefix": "rainbow-tutu-dress", "mosaic": True, "big_pos": "center 25%",
+                "models": ["golden", "ragdoll", "golden-back"],
+                "details": [("cat-back", "Back view"), ("rose", "Silver rose"), ("bow", "Satin bow"), ("tulle", "Tulle tiers")],
+                "desc": "A rainbow of tulle, ruffled tier upon tier from butter-cream through pink to lilac, topped with a silver satin bib, glitter rose and a big bow.",
+                "features": ["Layered tulle skirt in cream, pink and lilac", "Silver satin bib with a glitter rose",
+                             "Big satin bow at the back", "Bandana-style neckline"],
+            },
+        ],
+    },
+    {
+        "name": "Bows & Bandanas",
+        "blurb": "Frilly, fancy neckwear that turns heads.",
+        "short": "Lace collars, bows & bandanas",
+        "products": [
+            {
+                "code": "FP-B01", "name": "Sailor Plaid Lace Collar", "layout": "grid", "prefix": "plaid-lace-collar", "mosaic": True, "big_pos": "center 30%",
+                "models": ["hero", "cat-up", "cat-back"],
+                "details": [("bow", "Anchor button"), ("flat-blue", "Sky blue"), ("flat-pink", "Rose pink")],
+                "desc": "A soft plaid collar with a scalloped white lace edge and a plaid bow fastened with a gold anchor button. Ties at the back with a white ribbon.",
+                "features": ["Plaid in sky blue or rose pink", "Scalloped white lace edge",
+                             "Plaid bow with gold anchor button", "Soft white ribbon tie"],
             },
         ],
     },
@@ -197,7 +244,7 @@ def img_of(p, which="cover"):
         return p["cover"]
     if p.get("hero"):
         return p["hero"]
-    return f'{p["prefix"]}-{MODELS[0]}.jpg'
+    return f'{p["prefix"]}-{p.get("models", MODELS)[0]}.jpg'
 
 
 def count_label(n):
@@ -277,8 +324,12 @@ def page_top(cat, p, n):
 
 def page_grid(cat, p, n, idx):
     pre = p["prefix"]
-    models = "".join(f'<div class="tile"><img class="photo" src="images/{pre}-{m}.jpg"></div>' for m in p.get("models", MODELS))
-    details = "".join(f'<figure><div class="tile"><img class="photo" src="images/{pre}-{s}.jpg"></div><figcaption>{escape(c)}</figcaption></figure>'
+    mosaic = bool(p.get("mosaic"))
+    models = "".join(
+        f'<div class="tile"><img class="photo" src="images/{pre}-{m}.jpg"'
+        + (f' style="object-position:{p.get("big_pos", "center 20%")}"' if mosaic and k == 0 else "") + '></div>'
+        for k, m in enumerate(p.get("models", MODELS)))
+    details = "".join(f'<figure><div class="tile"><img class="photo" src="images/{pre}-{s}.jpg"></div>' + (f'<figcaption>{escape(c)}</figcaption>' if c else "") + '</figure>'
                       for s, c in p["details"])
     size = ""
     if p.get("sizes"):
@@ -288,7 +339,8 @@ def page_grid(cat, p, n, idx):
             f'{paw(190 if idx % 2 == 0 else 8, 3, 10, 15, "purple")}'
             f'<div class="head"><div class="l">{head_html(cat, p)}<h1>{escape(p["name"])}</h1><p class="desc">{escape(p["desc"])}</p></div>'
             f'<div class="r">{features_html(p["features"])}{size}</div></div>'
-            f'{perks_html()}<div class="models">{models}</div><div class="details">{details}</div>{foot(n)}</section>')
+            f'{perks_html()}<div class="models{" mosaic" if mosaic else ""}">{models}</div>'
+            f'<div class="details" style="grid-template-columns:repeat({len(p["details"])},1fr)">{details}</div>{foot(n)}</section>')
 
 
 def page_collar(cat, p, n):

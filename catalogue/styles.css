@@ -244,3 +244,9 @@ h1, h2, h3, h4, .display { font-family: 'Fredoka', sans-serif; font-weight: 700;
 .trio .fcard h3 { color: var(--sun); font-size: 14pt; margin-bottom: 4mm; }
 .trio .fcard .features li { font-size: 8.8pt; margin-bottom: 3mm; }
 .trio .fcard .features svg { fill: var(--sun); }
+
+/* mosaic variant: first model photo is big */
+.grid .models.mosaic { grid-template-rows: 62mm 62mm; }
+.grid .models.mosaic .tile:first-child { grid-column: 1 / span 2; grid-row: 1 / span 2; height: 128mm; transform: rotate(-.4deg); }
+.grid .models.mosaic .tile:not(:first-child) { height: 62mm; }
+.grid .models.mosaic .tile:nth-child(2) { transform: rotate(.8deg); } .grid .models.mosaic .tile:nth-child(3) { transform: rotate(-.8deg); }
