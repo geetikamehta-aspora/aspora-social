@@ -6,8 +6,8 @@ The long 49-page version lives in build_detailed.py (`python3 build_detailed.py 
 """
 import os
 from html import escape
-from build_detailed import (HANDLE, CONTACT_NAME, PAW, paw, foot, blobs, sticker,
-                            page_cover, page_pets, page_closing)
+from build_detailed import (HANDLE, CONTACT_NAME, PAW, paw, foot, blobs, sticker, perks_html, trail,
+                            page_cover, page_closing)
 
 
 def P(name, desc, pts, *imgs):
@@ -116,6 +116,21 @@ CATEGORIES = [
           ["Soft, breathable fabric", "Easy to wash and durable", "Comfortable neck, stretchy fit"], ("tshirt-elephant-pets.jpg", "center", 110, 106), "tshirt-elephant-front.jpg"),
     ]),
 ]
+
+
+def page_pets(n):
+    """Intro page: six different designs (no repeats), clothes and accessories, dogs and cats."""
+    pics = [("rangeela-kurta-set-golden-retriever", 12, 76, "center 20%"), ("gulabi-brocade-jacket-ragdoll-cat", 77, 88, "center 20%"),
+            ("jamuni-frock-dachshund", 142, 76, "center 20%"), ("tux-black-m2", 12, 148, "center 20%"),
+            ("mesh-harness-cat", 77, 160, "center 20%"), ("retro-sunglasses-yellow-golden", 142, 148, "center 25%")]
+    circles = "".join(f'<div class="circle" style="left:{x}mm;top:{y}mm;width:56mm;height:56mm"><img src="images/{f}.jpg" style="object-position:{pos}"></div>'
+                      for f, x, y, pos in pics)
+    return (f'<section class="page purple pets">{blobs([("psoft", 120, -50, 150), ("pdeep", -50, 180, 130)])}'
+            f'{paw(10, 12, 12, -14, "sun")}{paw(192, 56, 9, 20, "sun")}'
+            f'<h1>Dogs. Cats.<br>Everyone&rsquo;s invited!</h1>'
+            f'<p class="lead">Kurtas, frocks, jackets, tuxedos, bandanas, harnesses and shades &mdash; something stylish for every furry family member.</p>'
+            f'{circles}{sticker("Woof!", 2, 70, 26, -14, "round sun")}{sticker("Meow!", 118, 136, 26, 12, "round sun")}'
+            f'{perks_html(228)}{trail([(22 + i * 22, 252) for i in range(8)], 8, "sun", 90, .9)}{foot(n, True)}</section>')
 
 
 def block(cat, p, code, flip, top):
