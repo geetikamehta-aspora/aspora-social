@@ -1,0 +1,13 @@
+/* Funny series: headline panel on top, the photo uncropped in the middle, ordering bar at the bottom */
+#post { background: var(--yellow); }
+#top { position: absolute; left: 0; top: 0; width: 1080px; height: 300px; background: var(--yellow); padding: 0 56px; display: flex; flex-direction: column; justify-content: center; z-index: 3; }
+#top::after { content: ""; position: absolute; right: -150px; top: -230px; width: 520px; height: 520px; border-radius: 50%; background: var(--yellow-lt); opacity: .6; z-index: -1; }
+#h1 { margin: 0; font: 700 70px/1.04 "Fredoka"; letter-spacing: -.5px; color: var(--brown); text-wrap: balance; }
+#sub { margin: 14px 0 0; font: 600 38px/1.15 "Fredoka"; color: var(--indigo); }
+#photo { position: absolute; left: 0; top: 300px; width: 1080px; height: 930px; overflow: hidden; background: #000; }
+#photo img.main { display: block; width: 100%; height: 100%; object-fit: cover; }
+#bar { position: absolute; left: 0; right: 0; bottom: 0; height: 120px; background: var(--indigo); display: flex; align-items: center; gap: 22px; padding: 0 44px 0 40px; z-index: 3; }
+#bar .logo { height: 70px; flex: none; }
+#bar .prod { flex: 1; min-width: 0; font: 700 29px/1.15 "Fredoka"; color: var(--cream); }
+#bar .prod small { display: block; margin-top: 4px; font: 500 19px/1 "Poppins"; color: rgba(255,246,220,.82); letter-spacing: .5px; }
+#bar .chip { font-size: 25px; letter-spacing: 1px; text-transform: none; padding: 15px 26px 13px; flex: none; }
