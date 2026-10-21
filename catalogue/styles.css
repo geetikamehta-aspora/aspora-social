@@ -284,3 +284,8 @@ h1, h2, h3, h4, .display { font-family: 'Fredoka', sans-serif; font-weight: 700;
 .prod .txt h2 { font-size: 18pt; line-height: 1.04; margin: 3.5mm 0 3mm; }
 .prod .txt .desc { font-size: 9.6pt; line-height: 1.45; font-weight: 700; margin-bottom: 4mm; }
 .prod .txt .features li { font-size: 9pt; margin-bottom: 1.8mm; }
+
+/* tile wrapper so the code badge follows the photo, whatever its shape */
+.prod .imgs { display: flex; align-items: center; justify-content: center; height: 128mm; }
+.prod .tilewrap { position: relative; }
+.prod .tilewrap .mainimg { width: 100%; height: 100%; }

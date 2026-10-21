@@ -15,6 +15,11 @@ def P(name, desc, pts, *imgs):
     return {"name": name, "desc": desc, "pts": pts, "imgs": [i if isinstance(i, tuple) else (i, "center 25%") for i in imgs]}
 
 
+def tile_size(img):
+    """(width, height) in mm of the main photo tile; 4th/3rd tuple items override the 110 x 128 default."""
+    return (img[2], img[3]) if len(img) > 3 else (110, 128)
+
+
 CATEGORIES = [
     ("Pet Kurtas", "Embroidered, mirror-work & multi-print kurtas", [
         P("Phool Bagh Floral Kurta", "Aqua-teal kurta with coral, pink and gold floral embroidery.",
@@ -92,13 +97,13 @@ CATEGORIES = [
     ]),
     ("Collars & Harnesses", "Collars, harnesses & leash", [
         P("Ruffle Bell Collar", "Frilly polka-dot ribbon ruffles with a snap buckle and jingle bell.",
-          ["Five colours", "Snap-buckle closure", "Jingle-bell charm"], ("collar-hero.jpg", "63% 50%"), "collar-swatch-hotpink.jpg"),
+          ["Five colours", "Snap-buckle closure", "Jingle-bell charm"], ("collar-full.jpg", "center", 110, 84)),
         P("Orange Adventure Dog Harness", "Bright orange harness with a breathable teal mesh panel.",
           ["Adjustable buckle straps", "Top D-ring for the leash", "Grey contrast piping"], "harness-front.jpg", "harness-side.jpg"),
         P("Orange Trail Harness", "A lighter orange harness with a teal mesh panel, for dogs and cats.",
           ["Adjustable buckle straps", "Back ring for the leash", "Fits dogs and cats"], "trail-harness-golden.jpg", "trail-harness-flat-top.jpg"),
         P("Kitty Face Bell Collar", "Slim printed collar with a cat-face buckle and a shiny bell.",
-          ["Grey-black, blue or lime green", "Cat-face buckle", "Jingle bell"], "kitty-collar-ginger-blue.jpg", "kitty-collar-tabby-green.jpg"),
+          ["Grey-black, blue or lime green", "Cat-face buckle", "Jingle bell"], ("kitty-collar-composite.jpg", "center", 110, 128)),
         P("Lime Mesh Comfort Harness", "Lightweight lime-green mesh vest harness for cats and small dogs.",
           ["Breathable mesh fabric", "Secure, adjustable straps", "Strong D-ring and buckle"], "mesh-harness-cat.jpg", "mesh-harness-3d.jpg"),
         P("Premium Rope Leash", "Braided rope leash with a foam handle and reflective threads.",
@@ -112,7 +117,7 @@ CATEGORIES = [
     ]),
     ("Care & Grooming", "Nail clipper set", [
         P("Pet Nail Clipper Set", "Stainless steel clipper with a safety lock and a nail file.",
-          ["Non-slip ergonomic handle", "Strong spring for smooth use", "Dogs, cats and small animals"], "nail-clipper-pets.jpg", "nail-clipper-product.jpg"),
+          ["Non-slip ergonomic handle", "Strong spring for smooth use", "Dogs, cats and small animals"], ("nail-clipper-product.jpg", "center", 92, 128)),
     ]),
     ("Pet Tees", "Printed tees", [
         P("Dungaree-Print Pet Tee", "White sleeveless tee with a printed dungaree design.",
@@ -123,10 +128,11 @@ CATEGORIES = [
 
 def block(cat, p, code, flip, top):
     imgs = p["imgs"]
-    main = f'<div class="mainimg"><img src="images/{imgs[0][0]}" style="object-position:{imgs[0][1]}"></div>'
-    ins = ""  # round second-photo inset removed; the second photo in each P(...) is kept in the data in case it is wanted again
+    w, h = tile_size(imgs[0])
+    main = (f'<div class="tilewrap" style="width:{w}mm;height:{h}mm"><div class="mainimg"><img src="images/{imgs[0][0]}" style="object-position:{imgs[0][1]}"></div>'
+            f'<div class="codebadge">{code}</div></div>')
     pts = "".join(f"<li>{PAW}<span>{escape(t)}</span></li>" for t in p["pts"])
-    return (f'<div class="blk{" flip" if flip else ""}" style="top:{top}mm"><div class="imgs">{main}{ins}<div class="codebadge">{code}</div></div>'
+    return (f'<div class="blk{" flip" if flip else ""}" style="top:{top}mm"><div class="imgs">{main}</div>'
             f'<div class="txt"><span class="chip">{escape(cat)}</span><h2>{escape(p["name"])}</h2>'
             f'<p class="desc">{escape(p["desc"])}</p><ul class="features">{pts}</ul></div></div>')
 
@@ -156,7 +162,7 @@ def build():
     for name, short, prods in CATEGORIES:
         start = len(flat)
         for p in prods:
-            for im, _ in p["imgs"]:
+            for im, *_ in p["imgs"]:
                 assert os.path.exists(f"images/{im}"), im
             flat.append((name, p, f"FP{len(flat) + 1:02d}"))
         spans.append((name, short, start, len(flat) - 1))
