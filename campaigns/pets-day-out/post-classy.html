@@ -61,17 +61,17 @@
   }
   #lede b { font-weight: 600; color: var(--cream); }
 
-  /* ---- arches ---- */
+  /* ---- photo frames: each frame takes its photo's own proportions, so nothing is cropped ---- */
+  #row { position: absolute; left: 60px; width: 960px; top: 600px; height: 395px; display: flex; gap: 14px; align-items: flex-end; z-index: 3; }
   .arch {
-    position: absolute; width: 292px; border: 2px solid var(--gold); padding: 11px;
-    border-radius: 146px 146px 6px 6px; background: rgba(31,11,56,.35);
+    position: relative; flex: none; border: 2px solid var(--gold); padding: 10px;
+    border-radius: 28px; background: rgba(31,11,56,.35);
     box-shadow: 0 26px 50px rgba(0,0,0,.35);
   }
-  .arch .in { width: 100%; height: 100%; overflow: hidden; border-radius: 135px 135px 2px 2px; }
-  .arch img { display: block; width: 100%; height: 100%; object-fit: cover; }
-  #a-left   { left: 82px;  top: 632px; height: 410px; }
-  #a-mid    { left: 394px; top: 584px; height: 458px; width: 292px; }
-  #a-right  { left: 706px; top: 632px; height: 410px; }
+  .arch img { display: block; width: 100%; height: auto; border-radius: 18px; }
+  #a-left  { width: 296px; }
+  #a-mid   { width: 340px; }
+  #a-right { width: 296px; }
   .tag {
     position: absolute; z-index: 4; bottom: -17px; left: 50%; transform: translateX(-50%);
     background: var(--cream); color: var(--plum); border-radius: 999px; padding: 9px 22px;
@@ -111,9 +111,11 @@
   <div class="abs center" id="h2">Desi glam for dogs &amp; cats</div>
   <div class="abs center" id="lede">Get their fashion-show outfit from the <b>Furry Pooch stall</b><br>Kurtas, sherwanis, lehenga frocks &amp; more &mdash; for dogs and cats.</div>
 
-  <div class="arch" id="a-left"><div class="in"><img src="assets/photos/golden-rangeela-kurta.jpg" style="object-position:52% 50%" alt=""></div><div class="tag">Kurtas</div></div>
-  <div class="arch" id="a-mid"><div class="in"><img src="assets/photos/cat-floral-kurta.jpg" style="object-position:50% 42%" alt=""></div><div class="tag">For cats too</div></div>
-  <div class="arch" id="a-right"><div class="in"><img src="assets/photos/golden-red-frock.jpg" style="object-position:50% 50%" alt=""></div><div class="tag">Lehenga frocks</div></div>
+  <div id="row">
+    <div class="arch" id="a-left"><img src="assets/photos/golden-rangeela-kurta.jpg" alt="Golden retriever in a Rangeela kurta set"><div class="tag">Kurtas</div></div>
+    <div class="arch" id="a-mid"><img src="assets/photos/cat-floral-kurta.jpg" alt="Ragdoll cat in a Phool Bagh floral kurta"><div class="tag">For cats too</div></div>
+    <div class="arch" id="a-right"><img src="assets/photos/golden-red-frock.jpg" alt="Golden retriever in a red lehenga frock"><div class="tag">Lehenga frocks</div></div>
+  </div>
 
   <div class="abs center" id="info">
     <div class="col"><div class="k">Save the date</div><div class="v">24&ndash;25 October<small>2026 &nbsp;&middot;&nbsp; Two days</small></div></div>
