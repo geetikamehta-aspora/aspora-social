@@ -89,11 +89,11 @@ CATEGORIES = [
     ]),
     ("Collars & Harnesses", "Collars, harnesses & leash", [
         P("Ruffle Bell Collar", "Frilly polka-dot ribbon ruffles with a snap buckle and jingle bell.",
-          ["Five colours", "Snap-buckle closure", "Jingle-bell charm"], ("collar-full.jpg", "center", 110, 84)),
+          ["Five colours", "Snap-buckle closure", "Jingle-bell charm"], ("collar-full.jpg", "center", 110, 84), "collar-swatch-hotpink.jpg"),
         P("Orange Adventure Dog Harness", "Bright orange harness with a breathable teal mesh panel.",
           ["Adjustable buckle straps", "Top D-ring for the leash", "Grey contrast piping"], "harness-front.jpg", "harness-side.jpg"),
         P("Kitty Face Bell Collar", "Slim printed collar with a cat-face buckle and a shiny bell.",
-          ["Grey-black, blue or lime green", "Cat-face buckle", "Jingle bell"], ("kitty-collar-composite.jpg", "center", 110, 128)),
+          ["Grey-black, blue or lime green", "Cat-face buckle", "Jingle bell"], ("kitty-collar-composite.jpg", "center", 110, 128), "kitty-collar-white-green.jpg"),
         P("Lime Mesh Comfort Harness", "Lightweight lime-green mesh vest harness for cats and small dogs.",
           ["Breathable mesh fabric", "Secure, adjustable straps", "Strong D-ring and buckle"], "mesh-harness-cat.jpg", "mesh-harness-3d.jpg"),
         P("Premium Rope Leash", "Braided rope leash with a foam handle and reflective threads.",
@@ -107,7 +107,7 @@ CATEGORIES = [
     ]),
     ("Care & Grooming", "Nail clipper set", [
         P("Pet Nail Clipper Set", "Stainless steel clipper with a safety lock and a nail file.",
-          ["Non-slip ergonomic handle", "Strong spring for smooth use", "Dogs, cats and small animals"], ("nail-clipper-product.jpg", "center", 92, 128)),
+          ["Non-slip ergonomic handle", "Strong spring for smooth use", "Dogs, cats and small animals"], ("nail-clipper-product.jpg", "center", 92, 128), "nail-clipper-pets.jpg"),
     ]),
     ("Pet Tees", "Printed tees", [
         P("Dungaree-Print Pet Tee", "White sleeveless tee with a printed dungaree design.",
@@ -119,8 +119,9 @@ CATEGORIES = [
 def block(cat, p, code, flip, top):
     imgs = p["imgs"]
     w, h = tile_size(imgs[0])
+    ins = (f'<div class="insetimg"><img src="images/{imgs[1][0]}" style="object-position:{imgs[1][1]}"></div>' if len(imgs) > 1 else "")
     main = (f'<div class="tilewrap" style="width:{w}mm;height:{h}mm"><div class="mainimg"><img src="images/{imgs[0][0]}" style="object-position:{imgs[0][1]}"></div>'
-            f'<div class="codebadge">{code}</div></div>')
+            f'{ins}<div class="codebadge">{code}</div></div>')
     pts = "".join(f"<li>{PAW}<span>{escape(t)}</span></li>" for t in p["pts"])
     return (f'<div class="blk{" flip" if flip else ""}" style="top:{top}mm"><div class="imgs">{main}</div>'
             f'<div class="txt"><span class="chip">{escape(cat)}</span><h2>{escape(p["name"])}</h2>'
