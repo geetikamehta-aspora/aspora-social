@@ -267,3 +267,20 @@ h1, h2, h3, h4, .display { font-family: 'Fredoka', sans-serif; font-weight: 700;
 .twin .vphotos .tile:nth-child(odd) { transform: rotate(-.6deg); } .twin .vphotos .tile:nth-child(even) { transform: rotate(.6deg); }
 .twin .features li { font-size: 9pt; margin-bottom: 1.8mm; }
 .twin .head .l { max-width: 150mm; }
+
+/* ---------- compact catalogue: two products per page ---------- */
+.prod .blk { position: absolute; left: 12mm; right: 12mm; height: 128mm; display: flex; gap: 8mm; align-items: stretch; z-index: 2; }
+.prod .blk.flip { flex-direction: row-reverse; }
+.prod .imgs { position: relative; flex: 0 0 110mm; }
+.prod .mainimg { width: 110mm; height: 128mm; border-radius: 7mm; overflow: hidden; border: 0.9mm solid var(--brown); box-shadow: 2mm 2mm 0 var(--purple); background: var(--cream); transform: rotate(-.6deg); }
+.prod .flip .mainimg { transform: rotate(.6deg); box-shadow: -2mm 2mm 0 var(--purple); }
+.prod .mainimg img, .prod .insetimg img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.prod .insetimg { position: absolute; right: -5mm; bottom: -4mm; width: 42mm; height: 42mm; border-radius: 50%; overflow: hidden; border: 1.1mm solid var(--sun); box-shadow: 1.4mm 1.4mm 0 var(--brown); background: var(--cream); }
+.prod .flip .insetimg { right: auto; left: -5mm; }
+.prod .codebadge { position: absolute; left: -3mm; top: -3mm; transform: rotate(-6deg); background: var(--purple); color: var(--sun); font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 14pt; letter-spacing: 1px; padding: 1.4mm 4.4mm; border-radius: 5mm; border: 0.8mm solid var(--brown); box-shadow: 1.2mm 1.2mm 0 var(--brown); }
+.prod .flip .codebadge { left: auto; right: -3mm; transform: rotate(6deg); }
+.prod .txt { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding-left: 3mm; }
+.prod .flip .txt { padding-left: 0; padding-right: 3mm; }
+.prod .txt h2 { font-size: 18pt; line-height: 1.04; margin: 3.5mm 0 3mm; }
+.prod .txt .desc { font-size: 9.6pt; line-height: 1.45; font-weight: 700; margin-bottom: 4mm; }
+.prod .txt .features li { font-size: 9pt; margin-bottom: 1.8mm; }
