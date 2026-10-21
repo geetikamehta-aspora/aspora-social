@@ -1,0 +1,17 @@
+/* Furry Pooch brand posts: catalogue palette (yellow, brown, indigo) + Fredoka to match the brand type */
+@font-face { font-family: "Fredoka"; font-weight: 600; src: url("assets/fonts/fredoka-600.ttf"); }
+@font-face { font-family: "Fredoka"; font-weight: 700; src: url("assets/fonts/fredoka-700.ttf"); }
+@font-face { font-family: "Poppins"; font-weight: 500; src: url("assets/fonts/poppins-normal-500.ttf"); }
+@font-face { font-family: "Poppins"; font-weight: 600; src: url("assets/fonts/poppins-600.ttf"); }
+@font-face { font-family: "Poppins"; font-weight: 700; src: url("assets/fonts/poppins-700.ttf"); }
+:root { --yellow:#f5c04a; --yellow-lt:#ffd978; --brown:#4a2410; --brown-dk:#2e1608; --indigo:#5b4fd8; --indigo-dk:#43389f; --cream:#fff6dc; }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #111; }
+#post { position: relative; width: 1080px; height: 1350px; overflow: hidden; font-family: "Poppins", sans-serif; color: var(--cream); }
+.abs { position: absolute; }
+.logo { display: block; }
+.chip { display: inline-flex; align-items: center; gap: 10px; border-radius: 999px; white-space: nowrap; font: 700 22px/1 "Fredoka"; letter-spacing: 3px; text-transform: uppercase; padding: 13px 24px 11px; }
+.chip.yellow { background: var(--yellow); color: var(--brown); }
+.chip.indigo { background: var(--indigo); color: var(--cream); }
+.chip.cream  { background: var(--cream);  color: var(--brown); }
+.chip.soft   { letter-spacing: 1px; text-transform: none; font-size: 25px; padding: 15px 28px 13px; }
