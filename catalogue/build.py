@@ -46,8 +46,8 @@ CATEGORIES = [
           ["Front zip closure", "Chest pocket with pocket square", "Soft pink lining"], "gulabi-brocade-jacket-golden-retriever.jpg", "gulabi-brocade-jacket-front.jpg"),
     ]),
     ("Pet Lehengas & Frocks", "Festive lehenga dresses & frocks", [
-        P("Ruby Zari Lehenga Dress", "Ruby brocade lehenga dress with gold zari and a pearl-bead hem.",
-          ["Gold floral border", "Gold waist band", "Flared skirt for twirling"], ("ruby-lehenga-frock.jpg", "center 55%"), "ruby-lehenga-detail.jpg"),
+        P("Lal Pari Bow Frock", "Red party frock with gold motifs, a waist bow and golden tassels.",
+          ["Gold-lace hem", "Waist bow with golden tassels", "Sleeveless, gathered skirt"], "lal-pari-bow-frock-golden-retriever.jpg", "lal-pari-bow-frock-front.jpg"),
         P("Jamuni Double-Layer Frock", "Deep-purple twirl dress with two ruffled tiers and gold lace.",
           ["Gold gota lace trim", "Chevron bodice, tie-up neck", "Double-layer ruffle skirt"], "jamuni-frock-golden-retriever.jpg", "jamuni-frock-front.jpg"),
         P("Indradhanush Tutu Dress", "Rainbow tulle tiers with a silver satin bib, rose and bow.",
