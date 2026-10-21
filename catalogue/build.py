@@ -63,6 +63,20 @@ CATEGORIES = [
                 "features": ["Multi-print jacket with floral and paisley panels", "Hot-pink kurta, gold-lace striped sleeves",
                              "Mandarin collar, front button placket", "Curved hem"],
             },
+            {
+                "code": "FP-K04", "name": "Haldi Silver-Lace Kurta", "layout": "grid", "prefix": "haldi-silver-lace-kurta",
+                "details": [("front", "Front"), ("back", "Back"), ("collar", "Lace collar"), ("sleeve", "Lace cuff")],
+                "desc": "A sunny haldi-yellow kurta trimmed with silver zari lace on the collar, placket and sleeves. Bright, festive and ready for the puja.",
+                "features": ["Bright haldi-yellow body", "Silver lace on collar, placket and cuffs",
+                             "Stand collar with centre placket", "Curved hem, easy leg openings"],
+            },
+            {
+                "code": "FP-K05", "name": "Phoolwari Pocket Kurta", "layout": "grid", "prefix": "phoolwari-pocket-kurta",
+                "details": [("front", "Front"), ("back", "Back"), ("pocket", "Pocket square"), ("fabric", "Print")],
+                "desc": "A sky-blue garden of tiny flowers and paisleys, with a chest pocket and a mustard pocket square for the dapper touch.",
+                "features": ["Floral and paisley print on sky blue", "Chest pocket with mustard pocket square",
+                             "Stand collar, short sleeves", "Soft blue lining, curved hem"],
+            },
         ],
     },
     {
@@ -112,6 +126,33 @@ CATEGORIES = [
                 "features": ["Deep purple with gold gota lace", "Chevron-lace bodice, tie-up neck",
                              "Double-layered ruffle skirt", "Gold lace trim on every tier"],
             },
+            {
+                "code": "FP-L03", "name": "Lal Pari Bow Frock", "layout": "grid", "prefix": "lal-pari-bow-frock",
+                "models": ["shih-tzu", "golden-retriever", "persian-cat", "tabby-cat", "pomeranian", "dachshund"],
+                "details": [("front", "Front"), ("back", "Back"), ("border", "Gold-lace border"), ("bow", "Bow & tassels")],
+                "desc": "A red party frock scattered with tiny gold motifs, with a gold-lace hem and a bow tied at the waist, finished with golden tassels.",
+                "features": ["Red fabric with gold dot motifs", "Gold lace along the hem and neckline",
+                             "Waist bow with golden tassels", "Full gathered skirt, sleeveless"],
+            },
+        ],
+    },
+    {
+        "name": "Collars & Harnesses",
+        "blurb": "Frilly bell collars and an adventure-ready harness to finish the look.",
+        "short": "Ruffle bell collars & harnesses",
+        "products": [
+            {
+                "code": "FP-A01", "name": "Ruffle Bell Collar", "layout": "collar", "cover": "collar-hero.jpg",
+                "desc": "Frilly polka-dot ribbon ruffles with a snap buckle and a jingly bell. Shown on a Golden Retriever and a Ragdoll cat.",
+                "features": ["Ruffled polka-dot ribbon bows", "Snap-buckle closure", "Jingle-bell charm", "Five colours to pick from"],
+                "colours": [("red", "Red"), ("green", "Neon Green"), ("hotpink", "Hot Pink"), ("babypink", "Baby Pink"), ("orange", "Orange")],
+            },
+            {
+                "code": "FP-A02", "name": "Orange Adventure Dog Harness", "layout": "trio", "cover": "harness-front.jpg",
+                "desc": "A bright orange harness with a breathable teal mesh panel and adjustable buckle straps, made for walks that turn into adventures.",
+                "features": ["Bright orange body with breathable teal mesh panel", "Adjustable buckle straps at chest and sides",
+                             "Top D-ring for the leash clip", "Contrast grey piping"],
+            },
         ],
     },
 ]
@@ -152,6 +193,8 @@ def sticker(text, x, y, size, rot, cls="round", extra=""):
 
 
 def img_of(p, which="cover"):
+    if p.get("cover"):
+        return p["cover"]
     if p.get("hero"):
         return p["hero"]
     return f'{p["prefix"]}-{MODELS[0]}.jpg'
@@ -189,7 +232,7 @@ def page_contents(toc, n):
             f'<p class="lead">Handpicked Indian festive wear for pets. Pick a collection, find your favourite, and message us to order.</p>'
             f'<div class="toc">{rows}</div>'
             f'<div class="cta"><h3>Found your favourite?</h3><p>Note its design code (like FP-K01) and message {CONTACT_NAME} on Instagram {HANDLE}.</p></div>'
-            f'{trail([(40 + i * 17, 196 + i * 3.2) for i in range(9)], 9, "purple", 70)}{foot(n)}</section>')
+            f'{foot(n)}</section>')
 
 
 def page_pets(n):
@@ -234,7 +277,7 @@ def page_top(cat, p, n):
 
 def page_grid(cat, p, n, idx):
     pre = p["prefix"]
-    models = "".join(f'<div class="tile"><img class="photo" src="images/{pre}-{m}.jpg"></div>' for m in MODELS)
+    models = "".join(f'<div class="tile"><img class="photo" src="images/{pre}-{m}.jpg"></div>' for m in p.get("models", MODELS))
     details = "".join(f'<figure><div class="tile"><img class="photo" src="images/{pre}-{s}.jpg"></div><figcaption>{escape(c)}</figcaption></figure>'
                       for s, c in p["details"])
     size = ""
@@ -246,6 +289,27 @@ def page_grid(cat, p, n, idx):
             f'<div class="head"><div class="l">{head_html(cat, p)}<h1>{escape(p["name"])}</h1><p class="desc">{escape(p["desc"])}</p></div>'
             f'<div class="r">{features_html(p["features"])}{size}</div></div>'
             f'{perks_html()}<div class="models">{models}</div><div class="details">{details}</div>{foot(n)}</section>')
+
+
+def page_collar(cat, p, n):
+    sw = "".join(f'<div class="sw"><div class="c"><img src="images/collar-swatch-{f}.jpg"></div><span>{escape(t)}</span></div>' for f, t in p["colours"])
+    return (f'<section class="page collar">{blobs([("soft", 150, -40, 100), ("deep", -40, 230, 90)])}{paw(190, 3, 10, 15, "purple")}'
+            f'<div class="head"><div class="l">{head_html(cat, p)}<h1>{escape(p["name"])}</h1><p class="desc">{escape(p["desc"])}</p></div>'
+            f'<div class="r">{features_html(p["features"])}</div></div>'
+            f'<div class="tile hero"><img class="photo" src="images/collar-hero.jpg"></div>'
+            f'{sticker("Jingle<br>jingle!", 156, 44, 30, 10, "round")}'
+            f'<div class="duo"><div class="tile"><img class="photo" src="images/collar-detail-dog.jpg"></div><div class="tile"><img class="photo" src="images/collar-detail-cat.jpg"></div></div>'
+            f'<div class="swatches"><h3>Pick your colour!</h3><div class="swgrid">{sw}</div></div>{foot(n)}</section>')
+
+
+def page_trio(cat, p, n):
+    return (f'<section class="page trio">{blobs([("soft", 150, -40, 100), ("deep", -40, 240, 90)])}{paw(8, 3, 10, -15, "purple")}'
+            f'<div class="head"><div class="l">{head_html(cat, p)}<h1>{escape(p["name"])}</h1><p class="desc">{escape(p["desc"])}</p></div></div>'
+            f'<div class="tile big"><img class="photo" src="images/harness-front.jpg"></div>'
+            f'<div class="tile s1"><img class="photo" src="images/harness-side.jpg"></div><div class="tile s2"><img class="photo" src="images/harness-back.jpg"></div>'
+            f'<div class="fcard"><h3>Built for adventure</h3>{features_html(p["features"])}</div>'
+            f'{paw(150, 226, 30, 14, "sun", .35)}{paw(176, 240, 18, -12, "sun", .35)}'
+            f'{sticker("Let&rsquo;s<br>go!", 14, 218, 32, -10, "round sun")}{foot(n)}</section>')
 
 
 def page_closing():
@@ -286,7 +350,9 @@ def build():
         elif kind == "closing": out.append(page_closing())
         else:
             cat = CATEGORIES[item[1] - 1]; p = cat["products"][item[2]]
-            out.append(page_top(cat, p, n) if p["layout"] == "top" else page_grid(cat, p, n, n))
+            lay = p["layout"]
+            out.append(page_top(cat, p, n) if lay == "top" else page_collar(cat, p, n) if lay == "collar"
+                       else page_trio(cat, p, n) if lay == "trio" else page_grid(cat, p, n, n))
     doc = ('<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Furry Pooch Catalogue</title>'
            '<link rel="stylesheet" href="assets/fonts.css"><link rel="stylesheet" href="styles.css"></head><body>'
            + "".join(out) + '</body></html>')

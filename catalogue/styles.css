@@ -121,10 +121,10 @@ h1, h2, h3, h4, .display { font-family: 'Fredoka', sans-serif; font-weight: 700;
 .contents > .chip { align-self: flex-start; }
 .contents h1 { font-size: 32pt; line-height: 1; margin: 5mm 0 4mm; }
 .contents .lead { font-size: 11pt; font-weight: 700; max-width: 125mm; line-height: 1.45; }
-.toc { margin-top: 12mm; }
+.toc { margin-top: 9mm; }
 .toc-row {
   display: flex; align-items: center; gap: 5mm;
-  background: var(--cream); border: 0.8mm solid var(--brown); border-radius: 7mm; padding: 6mm 7mm; margin-bottom: 6mm;
+  background: var(--cream); border: 0.8mm solid var(--brown); border-radius: 7mm; padding: 4.2mm 7mm; margin-bottom: 4.6mm;
   box-shadow: 1.6mm 1.6mm 0 var(--purple);
 }
 .toc-row:nth-child(even) { transform: rotate(.35deg); } .toc-row:nth-child(odd) { transform: rotate(-.35deg); }
@@ -215,3 +215,32 @@ h1, h2, h3, h4, .display { font-family: 'Fredoka', sans-serif; font-weight: 700;
 .closing .qrcap { position: absolute; right: 14mm; top: 178mm; width: 62mm; text-align: center; font-size: 10pt; font-family: Fredoka, sans-serif; font-weight: 800; color: var(--cream); z-index: 2; }
 .closing .walk { position: absolute; left: 50%; bottom: 12mm; width: 118mm; transform: translateX(-50%) rotate(-1.2deg); border-radius: 8mm; overflow: hidden; border: 0.9mm solid var(--brown); box-shadow: 1.8mm 1.8mm 0 var(--sun); z-index: 2; background: #fff; }
 .closing .walk img { display: block; width: 100%; }
+
+/* ---------- product: collar layout ---------- */
+.collar .head, .trio .head { position: absolute; left: 12mm; right: 12mm; top: 11mm; display: flex; gap: 9mm; z-index: 2; }
+.collar .head .l, .trio .head .l { flex: 1.2; }
+.collar .head .r { flex: 1; padding-top: 1mm; }
+.collar h1, .trio h1 { font-size: 23pt; line-height: 1.02; margin: 3mm 0 3mm; }
+.collar .desc, .trio .desc { font-size: 9.3pt; line-height: 1.42; font-weight: 700; }
+.trio .head .l { flex: 1; max-width: 150mm; }
+.collar .features li { font-size: 8.8pt; margin-bottom: 1.5mm; }
+.collar .hero { position: absolute; left: 12mm; top: 62mm; width: 186mm; height: 131mm; transform: rotate(-.5deg); }
+.collar .duo { position: absolute; left: 12mm; top: 202mm; width: 86mm; display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.collar .duo .tile { height: 64mm; }
+.collar .duo .tile:first-child { transform: rotate(-1deg); } .collar .duo .tile:last-child { transform: rotate(1deg); }
+.swatches { position: absolute; left: 106mm; top: 200mm; width: 92mm; z-index: 2; }
+.swatches h3 { font-size: 15pt; margin-bottom: 3mm; }
+.swgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm 3mm; }
+.sw { text-align: center; }
+.sw .c { width: 25mm; height: 25mm; margin: 0 auto 1.4mm; border-radius: 50%; overflow: hidden; border: 0.9mm solid var(--brown); box-shadow: 1.2mm 1.2mm 0 var(--purple); background: #efe3d0; }
+.sw .c img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.sw span { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 8pt; letter-spacing: .6px; }
+
+/* ---------- product: trio layout (harness) ---------- */
+.trio .big { position: absolute; left: 12mm; top: 62mm; width: 104mm; height: 202mm; }
+.trio .s1 { position: absolute; left: 121mm; top: 62mm; width: 77mm; height: 50mm; transform: rotate(.8deg); }
+.trio .s2 { position: absolute; left: 121mm; top: 116mm; width: 77mm; height: 50mm; transform: rotate(-.8deg); }
+.trio .fcard { position: absolute; left: 121mm; top: 172mm; width: 77mm; height: 92mm; background: var(--purple); color: var(--cream); border: 0.9mm solid var(--brown); border-radius: 6mm; box-shadow: 1.6mm 1.6mm 0 var(--brown); padding: 6mm 5.5mm; }
+.trio .fcard h3 { color: var(--sun); font-size: 14pt; margin-bottom: 4mm; }
+.trio .fcard .features li { font-size: 8.8pt; margin-bottom: 3mm; }
+.trio .fcard .features svg { fill: var(--sun); }
