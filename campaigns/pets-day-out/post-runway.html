@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Furry Pooch x Pets Day Out — Runway (1080x1350)</title>
+<style>
+  @font-face { font-family: "Playfair"; font-weight: 600; font-style: normal; src: url("assets/fonts/playfair-display-normal-600.ttf"); }
+  @font-face { font-family: "Playfair"; font-weight: 700; font-style: normal; src: url("assets/fonts/playfair-display-normal-700.ttf"); }
+  @font-face { font-family: "Playfair"; font-weight: 600; font-style: italic; src: url("assets/fonts/playfair-display-italic-600.ttf"); }
+  @font-face { font-family: "Poppins";  font-weight: 500; src: url("assets/fonts/poppins-normal-500.ttf"); }
+  @font-face { font-family: "Poppins";  font-weight: 600; src: url("assets/fonts/poppins-600.ttf"); }
+
+  :root {
+    --plum-dk: #1f0b38;
+    --plum:    #34145a;
+    --magenta: #b8337f;
+    --gold:    #f4b73f;
+    --gold-lt: #ffd77a;
+    --cream:   #fff4e0;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #12061f; }
+
+  #post {
+    position: relative; width: 1080px; height: 1350px; overflow: hidden; color: var(--cream);
+    font-family: "Poppins", sans-serif;
+    background:
+      radial-gradient(ellipse 620px 520px at 14% 96%, rgba(184,51,127,.55), rgba(184,51,127,0) 70%),
+      radial-gradient(ellipse 640px 540px at 92% 8%,  rgba(184,51,127,.38), rgba(184,51,127,0) 70%),
+      radial-gradient(ellipse 560px 480px at 50% 58%, rgba(244,183,63,.30), rgba(244,183,63,0) 72%),
+      linear-gradient(170deg, var(--plum) 0%, var(--plum-dk) 100%);
+  }
+  /* fine gold inset frame */
+  #post::before {
+    content: ""; position: absolute; inset: 28px; border: 1.5px solid rgba(244,183,63,.55);
+    border-radius: 6px; pointer-events: none; z-index: 5;
+  }
+  .abs { position: absolute; }
+  .center { left: 0; right: 0; text-align: center; }
+
+  /* ---- brand row ---- */
+  #brands { top: 78px; display: flex; align-items: center; justify-content: center; gap: 38px; }
+  #brands img { display: block; }
+  #brands .fp  { height: 80px; }
+  #brands .pdo { height: 88px; }
+  #brands .bar { width: 1.5px; height: 62px; background: rgba(244,183,63,.7); }
+
+  /* ---- type ---- */
+  #eyebrow {
+    top: 206px; font: 600 21px/1 "Poppins"; letter-spacing: 8px; color: var(--gold); text-transform: uppercase;
+    padding-left: 8px;
+  }
+  #eyebrow::before, #eyebrow::after {
+    content: ""; display: inline-block; width: 54px; height: 1.5px; background: var(--gold);
+    vertical-align: middle; margin: 0 22px 3px;
+  }
+  #h1 { top: 252px; font: 700 92px/1.04 "Playfair"; color: var(--cream); letter-spacing: -.5px; }
+  #h2 { top: 366px; font: italic 600 62px/1.1 "Playfair"; color: var(--gold-lt); }
+  #lede {
+    top: 458px; font: 500 25px/1.55 "Poppins"; color: rgba(255,244,224,.86); letter-spacing: .3px;
+  }
+  #lede b { font-weight: 600; color: var(--cream); }
+
+  /* ---- runway stage: cutouts stand on a glossy floor with reflections, shadows and spotlights ---- */
+  #stage { position: absolute; left: 0; top: 548px; width: 1080px; height: 530px; z-index: 3; overflow: hidden;
+           -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 82%, transparent 100%); mask-image: linear-gradient(to bottom, #000 0%, #000 82%, transparent 100%); }
+  #stage svg { position: absolute; left: 0; top: 0; width: 1080px; height: 530px; }
+  .model { position: absolute; transform: translateX(-50%); transform-origin: 50% 100%; }
+  .model img { display: block; height: 100%; width: auto; }
+  .model .body { position: relative; z-index: 2; filter: drop-shadow(0 2px 3px rgba(0,0,0,.35)); }
+  .model .refl {
+    position: absolute; left: 0; top: 100%; z-index: 1; transform: scaleY(-1);
+    opacity: .42; filter: blur(1.4px);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 52%, rgba(0,0,0,.9) 100%);
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 52%, rgba(0,0,0,.9) 100%);
+  }
+  .model .refl img { display: block; }
+  .contact { position: absolute; transform: translateX(-50%); border-radius: 50%;
+             background: radial-gradient(ellipse at center, rgba(0,0,0,.75) 0%, rgba(0,0,0,.4) 45%, rgba(0,0,0,0) 72%); }
+  .card {
+    position: absolute; transform: translateX(-50%); z-index: 6; white-space: nowrap;
+    background: var(--cream); color: var(--plum); border-radius: 999px; padding: 9px 22px;
+    font: 600 15px/1 "Poppins"; letter-spacing: 2.5px; text-transform: uppercase;
+    box-shadow: 0 6px 16px rgba(0,0,0,.4), 0 0 0 1.5px rgba(244,183,63,.6);
+  }
+  .card.gold { background: var(--gold); }
+
+  /* ---- info ---- */
+  #info { top: 1098px; display: flex; justify-content: center; align-items: stretch; }
+  #info .col { padding: 0 46px; text-align: left; }
+  #info .sep { width: 1.5px; background: rgba(244,183,63,.7); }
+  #info .k { font: 600 15px/1 "Poppins"; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; }
+  #info .v { margin-top: 12px; font: 700 40px/1.08 "Playfair"; color: var(--cream); }
+  #info .v small { display: block; margin-top: 6px; font: 500 20px/1.3 "Poppins"; color: rgba(255,244,224,.8); letter-spacing: .5px; }
+
+  #sign { top: 1236px; font: italic 600 40px/1 "Playfair"; color: var(--cream); }
+  #sign span { color: var(--gold); }
+  #handle { top: 1290px; font: 600 19px/1 "Poppins"; letter-spacing: 5px; color: var(--gold); text-transform: uppercase; padding-left: 5px; }
+
+  /* sparkles */
+  svg.deco { position: absolute; left: 0; top: 0; width: 1080px; height: 1350px; z-index: 1; }
+</style>
+</head>
+<body>
+<div id="post">
+  
+  <div class="abs center" id="brands">
+    <img class="fp"  src="assets/logos/furry-pooch-cream.png" alt="Furry Pooch">
+    <div class="bar"></div>
+    <img class="pdo" src="assets/logos/pdo-white.png" alt="Pets Day Out">
+  </div>
+
+  <div class="abs center" id="eyebrow">Coming soon to Pets Day Out</div>
+  <div class="abs center" id="h1">Fashion show ready?</div>
+  <div class="abs center" id="h2">Desi glam for dogs &amp; cats</div>
+  <div class="abs center" id="lede">Get their fashion-show outfit from the <b>Furry Pooch stall</b><br>Kurta koti, sherwanis, lehenga dresses &amp; more.</div>
+
+  <div id="stage">
+    <svg id="floor" viewBox="0 0 1080 530"></svg>
+
+    <!-- stage coordinates: top of #stage = y 548 on the post -->
+    <div class="contact" style="left:190px; top:398px; width:250px; height:24px"></div>
+    <div class="contact" style="left:540px; top:418px; width:290px; height:28px"></div>
+    <div class="contact" style="left:880px; top:398px; width:240px; height:24px"></div>
+
+    <div class="model" id="m-left"  style="left:190px; top:110px; height:300px"><div class="refl"><img src="assets/cutouts/kurta-koti.png" alt="" style="height:300px"></div><img class="body" src="assets/cutouts/kurta-koti.png" alt="Golden retriever in a kurta koti"></div>
+    <div class="model" id="m-mid"   style="left:540px; top:62px;  height:370px"><div class="refl"><img src="assets/cutouts/lehenga-dress.png" alt="" style="height:370px"></div><img class="body" src="assets/cutouts/lehenga-dress.png" alt="Shih Tzu in a red lehenga dress"></div>
+    <div class="model" id="m-right" style="left:880px; top:70px;  height:340px"><div class="refl"><img src="assets/cutouts/sherwani.png" alt="" style="height:340px"></div><img class="body" src="assets/cutouts/sherwani.png" alt="Golden retriever in a sky-blue sherwani"></div>
+
+  </div>
+  <div class="card"      style="left:190px; top:1000px">Kurta Koti</div>
+  <div class="card gold" style="left:540px; top:1016px">Lehenga Dress</div>
+  <div class="card"      style="left:880px; top:1000px">Sherwani</div>
+
+  <div class="abs center" id="info">
+    <div class="col"><div class="k">Save the date</div><div class="v">24&ndash;25 October<small>2026</small></div></div>
+    <div class="sep"></div>
+    <div class="col"><div class="k">Venue</div><div class="v">Wings Convention Centre<small>Kilpauk, Chennai &nbsp;&middot;&nbsp; Star Night Fest</small></div></div>
+  </div>
+
+  <div class="abs center" id="sign">See you all there<span>.</span></div>
+  <div class="abs center" id="handle">@furry.pooch</div>
+</div>
+
+<script>
+  const NS = "http://www.w3.org/2000/svg";
+  const mk = (tag, attrs = {}, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+
+  /* ---------- floor, runway, lights (stage coords, 1080 x 530) ---------- */
+  const svg = document.getElementById("floor");
+  const defs = mk("defs", {}, svg);
+  const lg = (id, stops, x2 = 0, y2 = 1) => { const g = mk("linearGradient", { id, x1: 0, y1: 0, x2, y2 }, defs); stops.forEach(([o, c, a]) => mk("stop", { offset: o, "stop-color": c, "stop-opacity": a }, g)); };
+  const rg = (id, stops) => { const g = mk("radialGradient", { id }, defs); stops.forEach(([o, c, a]) => mk("stop", { offset: o, "stop-color": c, "stop-opacity": a }, g)); };
+  lg("deck",   [[0, "#1a0932", 0], [.12, "#1a0932", .85], [.8, "#2a1250", .55], [1, "#2a1250", 0]]);
+  lg("runway", [[0, "#2b1252", 0], [.07, "#2b1252", .55], [.18, "#33175f", .95], [.55, "#40206f", .98], [.88, "#4a2680", .7], [1, "#4a2680", 0]]);
+  lg("beam",   [[0, "#ffe2a0", 0], [.22, "#ffe2a0", .30], [1, "#ffe2a0", .06]]);
+  lg("wallglow", [[0, "#f4b73f", 0], [.5, "#f4b73f", .10], [1, "#f4b73f", 0]]);
+  rg("pool",   [[0, "#ffe9b4", .85], [.45, "#ffc866", .38], [1, "#ffc866", 0]]);
+  rg("bokeh",  [[0, "#ffd77a", .9], [.7, "#ffd77a", .35], [1, "#ffd77a", 0]]);
+  const blur = mk("filter", { id: "soft", x: "-30%", y: "-30%", width: "160%", height: "160%" }, defs); mk("feGaussianBlur", { stdDeviation: 14 }, blur);
+  const glow = mk("filter", { id: "glow", x: "-200%", y: "-200%", width: "500%", height: "500%" }, defs); mk("feGaussianBlur", { stdDeviation: 3.5 }, glow);
+
+  const H = 262;                       /* horizon (back edge of the stage) */
+
+  /* background bokeh, as if lit stage lights sit far behind */
+  const bokeh = [[90,150,16],[170,70,10],[260,200,14],[340,40,9],[430,120,12],[640,60,11],[720,170,15],[820,90,10],[930,40,12],[1000,190,16],[980,110,9],[60,230,10],[560,215,9]];
+  bokeh.forEach(([x, y, r]) => mk("circle", { cx: x, cy: y, r: r * 1.8, fill: "url(#bokeh)", opacity: .55 }, svg));
+  mk("rect", { x: 0, y: H - 70, width: 1080, height: 70, fill: "url(#wallglow)" }, svg);
+
+  /* stage deck + runway strip in perspective */
+  mk("rect", { x: 0, y: H, width: 1080, height: 530 - H, fill: "url(#deck)" }, svg);
+  const back = [380, 700], front = [-120, 1200];         /* runway edge x at horizon and at the bottom */
+  mk("polygon", { points: `${back[0]},${H} ${back[1]},${H} ${front[1]},530 ${front[0]},530`, fill: "url(#runway)" }, svg);
+  /* gold runway edge lines + lights */
+  const xAt = (side, y) => { const t = (y - H) / (530 - H); return back[side] + (front[side] - back[side]) * t; };
+  [0, 1].forEach(side => {
+    mk("line", { x1: xAt(side, H), y1: H, x2: xAt(side, 530), y2: 530, stroke: "#f4b73f", "stroke-width": 2, opacity: .55 }, svg);
+    for (let i = 0; i < 9; i++) {
+      const t = Math.pow(i / 8, 1.7), y = H + 6 + t * (530 - H - 14), x = xAt(side, y), r = 2 + t * 5.5;
+      mk("circle", { cx: x, cy: y, r: r * 2.2, fill: "#ffd77a", opacity: .75, filter: "url(#glow)" }, svg);
+      mk("circle", { cx: x, cy: y, r, fill: "#fff3cf" }, svg);
+    }
+  });
+  /* centre line dashes */
+  for (let i = 0; i < 7; i++) {
+    const t0 = Math.pow(i / 7, 1.6), t1 = Math.pow((i + .5) / 7, 1.6);
+    const y0 = H + 8 + t0 * (530 - H), y1 = H + 8 + t1 * (530 - H);
+    mk("line", { x1: 540, y1: y0, x2: 540, y2: y1, stroke: "#f4b73f", "stroke-width": 1.5 + t0 * 3, opacity: .35 }, svg);
+  }
+  /* horizon edge highlight */
+
+  /* spotlight beams (drawn behind the models) and floor pools */
+  const spots = [[190, 405, 190], [540, 424, 215], [880, 408, 190]];
+  spots.forEach(([cx, fy, w]) => {
+    mk("polygon", { points: `${cx - 26},-10 ${cx + 26},-10 ${cx + w},${fy} ${cx - w},${fy}`, fill: "url(#beam)", filter: "url(#soft)", opacity: .9 }, svg);
+    mk("ellipse", { cx, cy: fy + 4, rx: w + 20, ry: 38, fill: "url(#pool)", style: "mix-blend-mode:screen" }, svg);
+  });
+</script>
+</body>
+</html>
