@@ -112,5 +112,10 @@ window.FP_LOOKBOOK = [
   { c:'FP54', img:'assets/lookbook/FP54.webp', w:1100, h:1005, note:'Gold-rimmed round shades in yellow, purple, black and red' },
   { c:'FP22', img:'assets/lookbook/FP22.webp', w:1100, h:1005, note:'Red polka-dot twirl dress with a cream satin bow' },
   { c:'FP32', img:'assets/lookbook/FP32.webp', w:1100, h:1005, note:'Fun neckties in paw, stripe and corgi prints' },
-  { c:'FP31', img:'assets/lookbook/FP31.webp', w:1100, h:1005, note:'Glossy black satin bow tie with a red centre knot' }
+  { c:'FP31', img:'assets/lookbook/FP31.webp', w:1100, h:1005, note:'Glossy black satin bow tie with a red centre knot' },
+  { c:'FP16', img:'assets/lookbook/FP16.webp', w:1100, h:1100, note:'Dusty-rose sherwani with gold sequin motifs' },
+  { c:'FP20', img:'assets/lookbook/FP20.webp', w:1100, h:1100, note:'Deep-purple double-layer twirl dress with gold gota lace' },
+  { c:'FP03', img:'assets/lookbook/FP03.webp', w:1100, h:1100, note:'Multi-print ethnic jacket over a hot-pink kurta' },
+  { c:'FP04', img:'assets/lookbook/FP04.webp', w:1100, h:1100, note:'Haldi-yellow kurta trimmed with silver zari lace' },
+  { c:'FP19', img:'assets/lookbook/FP19.webp', w:1100, h:1100, note:'Red party frock with gold motifs, a waist bow and tassels' }
 ];
