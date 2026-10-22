@@ -10,9 +10,9 @@ from build_detailed import (HANDLE, CONTACT_NAME, PAW, paw, foot, blobs, sticker
                             page_cover, page_closing)
 
 
-def P(name, desc, pts, *imgs):
+def P(name, desc, pts, *imgs, tag=None):
     """imgs: file name, or (file name, css object-position)."""
-    return {"name": name, "desc": desc, "pts": pts, "imgs": [i if isinstance(i, tuple) else (i, "center 25%") for i in imgs]}
+    return {"name": name, "desc": desc, "pts": pts, "imgs": [i if isinstance(i, tuple) else (i, "center 25%") for i in imgs], "tag": tag}
 
 
 def tile_size(img):
@@ -27,7 +27,7 @@ CATEGORIES = [
         P("Aasmani Mirror-Work Kurta", "Sky-blue kurta with gold stars and hand-finished mirror borders.",
           ["Mirror, sequin and thread borders", "Mandarin collar, centre placket", "Flared sleeves, embroidered cuffs"], "sky-golden-retriever.jpg", "sky-flatlay-front.jpg"),
         P("Rangeela Jacket Kurta Set", "A multi-print ethnic jacket layered over a hot-pink kurta.",
-          ["Patchwork floral and paisley jacket", "Gold-lace striped sleeves", "Sizes XS to XL"], "rangeela-kurta-set-golden-retriever.jpg", "rangeela-kurta-set-front.jpg"),
+          ["Patchwork floral and paisley jacket", "Gold-lace striped sleeves", "Sizes XS to XL"], "rangeela-kurta-set-golden-retriever.jpg", "rangeela-kurta-set-front.jpg", tag="Pet Kurta Koti"),
         P("Haldi Silver-Lace Kurta", "Sunny haldi-yellow kurta trimmed with silver zari lace.",
           ["Silver lace on collar and cuffs", "Stand collar, centre placket", "Curved hem"], "haldi-silver-lace-kurta-golden-retriever.jpg", "haldi-silver-lace-kurta-front.jpg"),
         P("Phoolwari Pocket Kurta", "Sky-blue floral and paisley kurta with a mustard pocket square.",
@@ -171,7 +171,7 @@ def block(cat, p, code, flip, top):
             f'{ins}<div class="codebadge">{code}</div></div>')
     pts = "".join(f"<li>{PAW}<span>{escape(t)}</span></li>" for t in p["pts"])
     return (f'<div class="blk{" flip" if flip else ""}" style="top:{top}mm"><div class="imgs">{main}</div>'
-            f'<div class="txt"><span class="chip">{escape(cat)}</span><h2>{escape(p["name"])}</h2>'
+            f'<div class="txt"><span class="chip">{escape(p.get("tag") or cat)}</span><h2>{escape(p["name"])}</h2>'
             f'<p class="desc">{escape(p["desc"])}</p><ul class="features">{pts}</ul></div></div>')
 
 
