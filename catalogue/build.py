@@ -125,13 +125,15 @@ CATEGORIES = [
         P("Reflective Mesh Harness with Leash", "Black mesh harness with orange panels, reflective strips and a matching leash.",
           ["Reflective strips", "Breathable black mesh", "Leash comes with its own pouch"], ("bo-hero.jpg", "center", 90, 128), "bo-flat.jpg"),
     ]),
-    ("Shades & Headbands", "Sunglasses & festive headbands", [
+    ("Hats, Headbands & Shades", "Party hats, headbands & sunglasses", [
         P("Retro Round Sunglasses", "Gold-rimmed round shades in yellow, purple, black and red.",
           ["Four lens colours", "Gold-tone metal frame", "For dogs and cats"], "retro-sunglasses-yellow-golden.jpg", "retro-sunglasses-red-cat.jpg"),
         P("Santa Headband", "Red headband with two springy Santa toppers, for Christmas.",
           ["Two bobbing Santa faces", "Soft red band", "Christmas parties and photos"], ("hb-corgi.jpg", "center", 110, 114), "hb-santa-flat.jpg"),
         P("Reindeer Headband", "Red headband with glittery red antlers, gold ears and holly berries.",
           ["Glitter antlers", "Shimmery gold ears", "Holly and berry detail"], ("hb-cat.jpg", "center", 110, 86), "hb-reindeer-flat.jpg"),
+        P("Crochet Party Hat & Bib Set", "Handmade pink and mint crochet party hat with a matching flower bib, for cats.",
+          ["Soft, skin-friendly yarn", "Flower topper and scalloped bib", "Adjustable ties; hat 12 cm tall, 10 cm wide"], ("crochet-ragdoll.jpg", "center", 110, 110), ("crochet-flat.jpg", "center 4%")),
     ]),
     ("Care & Grooming", "Nail clipper set", [
         P("Pet Nail Clipper Set", "Stainless steel clipper with a safety lock and a nail file.",
