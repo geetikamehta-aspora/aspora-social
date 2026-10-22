@@ -53,7 +53,7 @@ CATEGORIES = [
         P("Lal Pari Bow Frock", "Red party frock with gold motifs, a waist bow and golden tassels.",
           ["Gold-lace hem", "Waist bow with golden tassels", "Sleeveless, gathered skirt"], "lal-pari-bow-frock-golden-retriever.jpg", "lal-pari-bow-frock-front.jpg"),
         P("Jamuni Double-Layer Frock", "Deep-purple twirl dress with two ruffled tiers and gold lace.",
-          ["Gold gota lace trim", "Chevron bodice, tie-up neck", "Double-layer ruffle skirt"], "jamuni-frock-golden-retriever.jpg", "jamuni-frock-front.jpg"),
+          ["Gold gota lace trim", "Chevron bodice, tie-up neck", "Double-layer ruffle skirt"], ("jamuni-shihtzu.jpg", "center", 110, 100), "jamuni-frock-front.jpg"),
         P("Indradhanush Tutu Dress", "Rainbow tulle tiers with a silver satin bib, rose and bow.",
           ["Layered tulle skirt", "Silver satin bib, glitter rose", "Big satin bow at the back"], "rainbow-tutu-dress-golden.jpg", "rainbow-tutu-dress-rose.jpg"),
         P("Lal Polka Bow Frock", "Red polka-dot twirl dress with a cream satin bow.",
