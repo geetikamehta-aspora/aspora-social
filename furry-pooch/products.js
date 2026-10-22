@@ -130,5 +130,8 @@ window.FP_LOOKBOOK = [
 /* PRICES (INR). Fill from the price sheet. A number is a single price; an object is per size, e.g. { XS:1600, S:1800, M:2000 }.
    Styles with no entry show no price. */
 window.FP_PRICES = {
-  // FP03: { XS:1600, S:1800, M:2000, L:2200, XL:2400 },
+  FP03: { XS:1600, S:1800, M:2000, L:2200, XL:2400 },   // from the price list on the FP03 product image
+  FP04: { XS:1299, S:1299, M:1399, L:1499 },            // sheet: Silk Yellow Gotapati Kurta
+  FP16: { XS:1499, S:1499, M:1599, L:1699 },            // sheet: Pink Orange Sherwani with Sequins
+  FP20: { XS:1799, S:1799, M:1999, L:2199 }             // sheet: Double layered purple gotapattu ethnic frock
 };
