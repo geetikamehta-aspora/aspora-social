@@ -21,7 +21,7 @@ def tile_size(img):
 
 
 CATEGORIES = [
-    ("Pet Kurtas", "Embroidered, mirror-work & multi-print kurtas", [
+    ("Kurta Sets", "Embroidered, mirror-work & multi-print kurtas", [
         P("Phool Bagh Floral Kurta", "Aqua-teal kurta with coral, pink and gold floral embroidery.",
           ["Floral embroidery all over", "Gold thread on collar and sleeves", "Stand collar, short sleeves"], ("teal-floral-kurta.jpg", "center 22%"), "teal-kurta-detail.jpg"),
         P("Aasmani Mirror-Work Kurta", "Sky-blue kurta with gold stars and hand-finished mirror borders.",

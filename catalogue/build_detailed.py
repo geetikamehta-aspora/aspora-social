@@ -37,7 +37,7 @@ PERKS = [("leaf", "Lightweight<br>&amp; Comfortable"), ("paw", "Festive<br>Look"
 
 CATEGORIES = [
     {
-        "name": "Pet Kurtas",
+        "name": "Kurta Sets",
         "blurb": "Embroidered, mirror-work and multi-print Indian kurtas, tailored for dogs and cats.",
         "short": "Embroidered, mirror-work & multi-print kurtas",
         "products": [
