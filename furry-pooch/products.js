@@ -107,5 +107,10 @@ window.FP_LOOKBOOK = [
   { c:'FP25', img:'assets/lookbook/FP25.webp', w:1100, h:1005, note:'Mint and peach flowers with a sunny yellow satin bow' },
   { c:'FP24', img:'assets/lookbook/FP24.webp', w:1100, h:1005, note:'Pink blossoms on white with a satin bow and crystal centre' },
   { c:'FP23', img:'assets/lookbook/FP23.webp', w:1100, h:1005, note:'Pastel stripes with a big orange satin bow' },
-  { c:'FP48', img:'assets/lookbook/FP48.webp', w:1100, h:1005, note:'Slim printed collar with a cat-face buckle and bell' }
+  { c:'FP48', img:'assets/lookbook/FP48.webp', w:1100, h:1005, note:'Slim printed collar with a cat-face buckle and bell' },
+  { c:'FP26', also:['FP27','FP28','FP29','FP30','FP47'], badge:'FP26–30 · 47', title:'Collars, Bandanas, Bow Ties & Harness', img:'assets/lookbook/FP26.webp', w:1100, h:1005, note:'Sailor lace collars, satin bandanas, bow ties and the orange adventure harness' },
+  { c:'FP54', img:'assets/lookbook/FP54.webp', w:1100, h:1005, note:'Gold-rimmed round shades in yellow, purple, black and red' },
+  { c:'FP22', img:'assets/lookbook/FP22.webp', w:1100, h:1005, note:'Red polka-dot twirl dress with a cream satin bow' },
+  { c:'FP32', img:'assets/lookbook/FP32.webp', w:1100, h:1005, note:'Fun neckties in paw, stripe and corgi prints' },
+  { c:'FP31', img:'assets/lookbook/FP31.webp', w:1100, h:1005, note:'Glossy black satin bow tie with a red centre knot' }
 ];

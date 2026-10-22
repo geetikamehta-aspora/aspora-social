@@ -522,7 +522,7 @@
   const lbTrack = $('#lbTrack');
   lbTrack.innerHTML = LB.map(l => {
     const p = byCode[l.c], all = [l.c, ...(l.also || [])];
-    const badge = all.length > 1 ? `${all[0]}–${all[all.length - 1].slice(2)}` : l.c;
+    const badge = l.badge || (all.length > 1 ? `${all[0]}–${all[all.length - 1].slice(2)}` : l.c);
     const name = l.title || p.n;
     return `<figure class="lb-card"><button class="lb-img" data-open="${l.c}" aria-label="View ${esc(name)}, ${badge}" data-cursor="view"><img src="${l.img}" alt="Lookbook collage: ${esc(name)} on dogs and cats, with fabric and stitching close-ups" loading="lazy" width="${l.w}" height="${l.h}" style="aspect-ratio:${l.w}/${l.h}"></button>
       <figcaption><span class="code">${badge}</span><div><b>${esc(name)}</b><small>${esc(l.note)}</small></div><button class="pick-btn" data-pick="${all.join(',')}" aria-pressed="false" data-cursor="add!"><svg><use href="#paw"/></svg></button></figcaption></figure>`;
