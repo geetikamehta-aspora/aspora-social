@@ -34,6 +34,10 @@ CATEGORIES = [
           ["Floral and paisley print", "Chest pocket and pocket square", "Soft blue lining"], "phoolwari-pocket-kurta-golden-retriever.jpg", "phoolwari-pocket-kurta-front.jpg"),
         P("Gulabi Patta Gota Kurta", "Bright pink kurta with a red leaf print and gold gota lace.",
           ["Red leaf print on pink", "Gold gota lace trim", "Stand collar, centre placket"], "gulabi-patta-kurta-poodle.jpg", "gulabi-patta-kurta-front.jpg"),
+        P("Sindoori Zari Jaal Kurta", "Red sleeveless kurta with all-over gold jaal embroidery and sequin lace trim.",
+          ["Gold jaal embroidery", "Beaded lace on collar and armholes", "Sleeveless, curved hem"], ("rz-hero.jpg", "center", 110, 97), "rz-flat.jpg"),
+        P("Sarson Block-Print Kurta", "Mustard-yellow short-sleeve kurta with a cream paisley block print.",
+          ["Cream block print", "Short sleeves", "Stand collar, easy fit"], ("mk-hero.jpg", "center", 110, 102), "mk-flat.jpg"),
     ]),
     ("Sherwanis & Suits", "Sherwanis & tuxedo suits", [
         P("Gulaal Sequin Sherwani", "Dusty-rose sherwani sprinkled with gold sequin motifs.",
@@ -116,10 +120,18 @@ CATEGORIES = [
           ["Reflective for night walks", "360-degree rotating hook", "Ten colours"], "rope-leash-hero.jpg", "rope-leash-rolls.jpg"),
         P("Tactical Control-Handle Dog Collar", "Black nylon training collar with a padded inner and control handle.",
           ["Secure buckle lock and D-ring", "Soft, breathable padding", "Adjustable fit"], "tactical-collar-dog.jpg", "tactical-collar-product.jpg"),
+        P("Teddy Bear Tweed Harness", "Grey tweed vest harness with cream trim and a cute teddy-bear patch.",
+          ["Teddy-bear patch with D-ring", "Soft tweed with cream piping", "Adjustable buckle straps"], ("th-hero.jpg", "center", 110, 104), "th-flat.jpg"),
+        P("Reflective Mesh Harness with Leash", "Black mesh harness with orange panels, reflective strips and a matching leash.",
+          ["Reflective strips", "Breathable black mesh", "Leash comes with its own pouch"], ("bo-hero.jpg", "center", 90, 128), "bo-flat.jpg"),
     ]),
-    ("Cool Shades", "Retro round sunglasses", [
+    ("Shades & Headbands", "Sunglasses & festive headbands", [
         P("Retro Round Sunglasses", "Gold-rimmed round shades in yellow, purple, black and red.",
           ["Four lens colours", "Gold-tone metal frame", "For dogs and cats"], "retro-sunglasses-yellow-golden.jpg", "retro-sunglasses-red-cat.jpg"),
+        P("Santa Headband", "Red headband with two springy Santa toppers, for Christmas.",
+          ["Two bobbing Santa faces", "Soft red band", "Christmas parties and photos"], ("hb-corgi.jpg", "center", 110, 114), "hb-santa-flat.jpg"),
+        P("Reindeer Headband", "Red headband with glittery red antlers, gold ears and holly berries.",
+          ["Glitter antlers", "Shimmery gold ears", "Holly and berry detail"], ("hb-cat.jpg", "center", 110, 86), "hb-reindeer-flat.jpg"),
     ]),
     ("Care & Grooming", "Nail clipper set", [
         P("Pet Nail Clipper Set", "Stainless steel clipper with a safety lock and a nail file.",
