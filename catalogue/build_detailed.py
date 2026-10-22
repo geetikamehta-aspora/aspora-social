@@ -624,7 +624,7 @@ def page_twin(cat, p, n):
 
 
 def page_closing():
-    rows = [("phone", f"Call {CONTACT_NAME}", PHONE), ("insta", "Instagram", HANDLE), ("mail", "Email", EMAIL)]
+    rows = [("phone", "Call for enquiry", PHONE), ("insta", "Instagram", HANDLE), ("mail", "Email", EMAIL)]
     r = "".join(f'<div class="crow"><i>{ICONS[i]}</i><div><small>{l}</small><span>{escape(t)}</span></div></div>' for i, l, t in rows)
     return (f'<section class="page purple closing">{blobs([("psoft", 120, -50, 150), ("pdeep", -50, 200, 130)])}'
             f'{paw(14, 20, 13, -16, "sun")}{paw(30, 38, 9, 10, "sun")}{paw(182, 22, 13, 18, "sun")}'
