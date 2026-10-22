@@ -122,5 +122,13 @@ window.FP_LOOKBOOK = [
   { c:'FP02', img:'assets/lookbook/FP02.webp', w:1100, h:1172, note:'Sky blue with gold stars and mirror borders' },
   { c:'FP05', img:'assets/lookbook/FP05.webp', w:1100, h:1005, note:'Sky-blue floral and paisley with a mustard pocket square' },
   { c:'FP01', img:'assets/lookbook/FP01.webp', w:1100, h:1100, note:'Aqua-teal with coral, pink and gold floral embroidery' },
-  { c:'FP01', img:'assets/lookbook/FP01-2.webp', w:1100, h:1100, note:'A second look at the aqua floral embroidered kurta' }
+  { c:'FP01', img:'assets/lookbook/FP01-2.webp', w:1100, h:1100, note:'A second look at the aqua floral embroidered kurta' },
+  { c:'FP01', img:'assets/lookbook/FP01-3.webp', w:1100, h:1172, note:'Aqua floral kurta with gold embroidery, close up' },
+  { c:'FP06', img:'assets/lookbook/FP06.webp', w:1100, h:1173, note:'Bright pink with a red leaf print and gold gota lace' }
 ];
+
+/* PRICES (INR). Fill from the price sheet. A number is a single price; an object is per size, e.g. { XS:1600, S:1800, M:2000 }.
+   Styles with no entry show no price. */
+window.FP_PRICES = {
+  // FP03: { XS:1600, S:1800, M:2000, L:2200, XL:2400 },
+};

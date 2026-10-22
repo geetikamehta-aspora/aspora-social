@@ -549,3 +549,10 @@ section{position:relative}
 
 /* clipped sections must never scroll sideways when focus or buttons move content */
 .hero,.lookbook,.how,.boop,.contact,.footer,.collections,.about{overflow:hidden;overflow:clip}
+
+/* prices */
+.price{font-family:var(--f-display);font-weight:400;font-size:1.25rem;color:var(--indigo);margin-top:4px}
+.m-price{display:grid;gap:2px}
+.m-price b{font-family:var(--f-display);font-weight:400;font-size:1.9rem;color:var(--indigo)}
+.m-price small{font-weight:600;color:var(--choc-2)}
+.d-total{margin:0;padding:12px 20px;font-family:var(--f-display);font-size:1.3rem;color:var(--indigo);border-top:3px dashed var(--choc)}

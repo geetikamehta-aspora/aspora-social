@@ -344,6 +344,11 @@
   const esc = s => String(s).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
   const tagOf = p => p.t || colName[p.k];
   const IG = 'https://ig.me/m/furry.pooch';
+  const PR = window.FP_PRICES || {};
+  const inr = n => '₹' + Number(n).toLocaleString('en-IN');
+  const minPrice = c => { const v = PR[c]; if (v == null) return null; return typeof v === 'object' ? Math.min(...Object.values(v)) : v; };
+  const priceText = c => { const v = PR[c]; if (v == null) return ''; return typeof v === 'object' ? 'from ' + inr(minPrice(c)) : inr(v); };
+  const sizeText = c => { const v = PR[c]; return v && typeof v === 'object' ? Object.entries(v).map(([k, x]) => `${k} ${inr(x)}`).join(' · ') : ''; };
 
   /* ---- scroll lock shared by modal, drawer and menu ---- */
   let locks = 0;
@@ -376,8 +381,11 @@
       b.classList.toggle('on', on); b.setAttribute('aria-pressed', on);
       b.setAttribute('aria-label', (on ? 'Remove ' : 'Add ') + cs.join(', ') + (on ? ' from' : ' to') + ' my picks');
     });
-    dList.innerHTML = picks.map(c => { const p = byCode[c]; return `<li><img src="${photo(c)}" alt=""><div><b>${c}</b><span>${esc(p.n)}</span></div><button data-rm="${c}" aria-label="Remove ${c}" data-cursor="remove"><svg><use href="#close"/></svg></button></li>`; }).join('');
+    dList.innerHTML = picks.map(c => { const p = byCode[c]; return `<li><img src="${photo(c)}" alt=""><div><b>${c}</b><span>${esc(p.n)}${PR[c] != null ? ' · ' + priceText(c) : ''}</span></div><button data-rm="${c}" aria-label="Remove ${c}" data-cursor="remove"><svg><use href="#close"/></svg></button></li>`; }).join('');
     dEmpty.hidden = picks.length > 0;
+    const priced = picks.filter(c => PR[c] != null), tot = priced.reduce((s, c) => s + minPrice(c), 0);
+    $('#dTotal').hidden = !priced.length;
+    $('#dTotal').textContent = priced.length ? `${priced.some(c => typeof PR[c] === 'object') ? 'From ' : ''}${inr(tot)}${priced.length < picks.length ? ' for priced styles' : ''}` : '';
     $('#dGo').style.display = $('#dClear').style.display = picks.length ? '' : 'none';
     if (!codesDirty) oCodes.value = picks.join(', ');
     picksLine.textContent = picks.length ? 'Filled from My picks: ' + picks.map(c => byCode[c].n).join(', ') + '.' : '';
@@ -444,7 +452,7 @@
           <span class="code">${p.c}</span>
         </button>
         <button class="pick-btn" data-pick="${p.c}" aria-pressed="false" data-cursor="add!"><svg><use href="#paw"/></svg></button>
-        <div class="pbody"><span class="tag">${esc(tagOf(p))}</span><h3>${esc(p.n)}</h3><p>${esc(p.d)}</p></div>
+        <div class="pbody"><span class="tag">${esc(tagOf(p))}</span><h3>${esc(p.n)}</h3><p>${esc(p.d)}</p>${PR[p.c] != null ? `<b class="price">${priceText(p.c)}</b>` : ''}</div>
       </article></li>`).join('');
     emptyEl.hidden = shown.length > 0;
     const label = fcol === 'all' ? 'all collections' : colName[fcol];
@@ -468,6 +476,7 @@
   function fillModal(code) {
     const p = byCode[code]; modalCode = code;
     $('#mCode').textContent = code; $('#mTag').textContent = tagOf(p); $('#mName').textContent = p.n; $('#mDesc').textContent = p.d;
+    $('#mPrice').innerHTML = PR[code] != null ? `<b>${priceText(code)}</b>${sizeText(code) ? `<small>${sizeText(code)}</small>` : ''}` : '';
     $('#mList').innerHTML = p.b.map(x => `<li><svg><use href="#paw"/></svg>${esc(x)}</li>`).join('');
     mImg.alt = p.n;
     mThumbs.innerHTML = [0, 1].map(i => `<button data-v="${i}" aria-label="${i ? 'Flat-lay or detail' : 'On a pet'}" aria-pressed="false"><img src="${photo(code, i === 1)}" alt=""></button>`).join('');
@@ -553,7 +562,7 @@
   }
   function orderMessage() {
     const raw = oCodes.value.trim(), codes = parseCodes(raw);
-    const items = codes.length ? codes.map(c => byCode[c] ? `${c} ${byCode[c].n}` : c) : (raw ? [raw] : []);
+    const items = codes.length ? codes.map(c => byCode[c] ? `${c} ${byCode[c].n}${PR[c] != null ? ' (' + priceText(c) + ')' : ''}` : c) : (raw ? [raw] : []);
     const pet = oPet.value.trim(), note = oNote.value.trim(), name = oName.value.trim();
     return `Hi Furry Pooch! 🐾 I'd like to order: ${items.length ? items.join(', ') : '…'}.` + (pet ? ` For my pet: ${pet}.` : '') + (note ? ` Note: ${note}.` : '') + (name ? ` Thanks, ${name}` : '');
   }
