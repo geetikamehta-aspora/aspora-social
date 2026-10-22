@@ -102,5 +102,10 @@ window.FP_LOOKBOOK = [
   { c:'FP35', img:'assets/lookbook/FP35.webp', w:1100, h:1005, note:'Black with a red bow, or red with a black bow' },
   { c:'FP34', img:'assets/lookbook/FP34.webp', w:1100, h:1005, note:'Black with a white shirt front and bow tie' },
   { c:'FP49', img:'assets/lookbook/FP49.webp', w:1100, h:1100, note:'Lightweight lime mesh vest for cats and small dogs' },
-  { c:'FP50', img:'assets/lookbook/FP50.webp', w:1100, h:1100, note:'Braided rope leash with reflective threads, in ten colours' }
+  { c:'FP50', img:'assets/lookbook/FP50.webp', w:1100, h:1100, note:'Braided rope leash with reflective threads, in ten colours' },
+  { c:'FP33', img:'assets/lookbook/FP33.webp', w:1100, h:1005, note:'Pink and black floral bandana with a red or black bow tie' },
+  { c:'FP25', img:'assets/lookbook/FP25.webp', w:1100, h:1005, note:'Mint and peach flowers with a sunny yellow satin bow' },
+  { c:'FP24', img:'assets/lookbook/FP24.webp', w:1100, h:1005, note:'Pink blossoms on white with a satin bow and crystal centre' },
+  { c:'FP23', img:'assets/lookbook/FP23.webp', w:1100, h:1005, note:'Pastel stripes with a big orange satin bow' },
+  { c:'FP48', img:'assets/lookbook/FP48.webp', w:1100, h:1005, note:'Slim printed collar with a cat-face buckle and bell' }
 ];
