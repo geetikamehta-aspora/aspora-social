@@ -88,9 +88,14 @@ window.FP_LOOKBOOK = [
   { c:'FP08', img:'assets/lookbook/FP08.webp', w:1100, h:1005, note:'Mustard block print, for dogs and cats' },
   { c:'FP07', img:'assets/lookbook/FP07.webp', w:1100, h:1005, note:'Red with all-over gold jaal and beaded lace' },
   { c:'FP41', img:'assets/lookbook/FP41.webp', w:1100, h:1005, note:'Deep emerald with gold gota lace' },
+  { c:'FP40', img:'assets/lookbook/FP40.webp', w:1100, h:1005, note:'Sunny yellow with sequin flowers and a silver lace edge' },
   { c:'FP38', also:['FP39'], title:'Lal Jaali & Gulabi Sheesha Bow Bandanas', img:'assets/lookbook/FP38.webp', w:1100, h:1327, note:'Crimson FP38 and pink mirror-work FP39, both with big bows' },
   { c:'FP42', also:['FP43','FP44','FP45'], title:'Festive Bow Bandanas', img:'assets/lookbook/FP42.webp', w:1100, h:1005, note:'FP42 black floral, FP43 gold frill, FP44 saffron stripe, FP45 navy paisley' },
   { c:'FP55', also:['FP56'], title:'Santa & Reindeer Headbands', img:'assets/lookbook/FP55.webp', w:1100, h:1005, note:'FP55 Santa and FP56 reindeer, for Christmas photos' },
+  { c:'FP37', img:'assets/lookbook/FP37.webp', w:1100, h:1159, note:'White shirt collar with a black bow tie and soft Velcro' },
+  { c:'FP17', img:'assets/lookbook/FP17.webp', w:1100, h:1100, note:'In black, gray or navy, with a red or pink bow tie' },
   { c:'FP53', img:'assets/lookbook/FP53.webp', w:1100, h:1005, note:'Reflective mesh harness with its own leash' },
-  { c:'FP52', img:'assets/lookbook/FP52.webp', w:1100, h:1005, note:'Teddy-bear patch on soft grey tweed' }
+  { c:'FP52', img:'assets/lookbook/FP52.webp', w:1100, h:1005, note:'Teddy-bear patch on soft grey tweed' },
+  { c:'FP51', img:'assets/lookbook/FP51.webp', w:1100, h:1100, note:'Padded nylon training collar with a control handle' },
+  { c:'FP58', img:'assets/lookbook/FP58.webp', w:1100, h:1100, note:'Stainless steel clipper with a safety lock and nail file' }
 ];
