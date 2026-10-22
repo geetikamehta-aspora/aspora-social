@@ -42,6 +42,8 @@ CATEGORIES = [
           ["Floral brocade koti, gold buttons", "Green kurta with gold-lace cuffs", "Stand collar, front buttons"], ("ks-green-main.jpg", "center", 110, 100), "ks-green-detail.jpg", tag="Pet Kurta Koti"),
         P("Firozi Brocade Koti Set", "Silver-gold floral brocade koti with gold buttons over a sky-blue kurta.",
           ["Floral brocade koti, gold buttons", "Sky-blue kurta, embroidered cuffs", "Mandarin collar, curved hem"], ("ks-sky-main.jpg", "center", 110, 78), "ks-sky-flat.jpg", tag="Pet Kurta Koti"),
+        P("Mor Kalamkari Peacock Kurta", "Cream kurta with a kalamkari-style print of peacocks and bright flowers.",
+          ["Peacock and floral print", "Wooden button placket", "Stand collar, short sleeves, blue lining"], ("ks-kalam-main.jpg", "center", 110, 76), "ks-kalam-flat.jpg"),
         P("Baingani Paisley Embroidered Kurta", "Plum kurta with gold dots and a hand-embroidered paisley panel.",
           ["Embroidered paisley panel", "Embroidered cuffs", "Stand collar, curved hem"], ("ks-plum-main.jpg", "center", 110, 93), "ks-plum-flat.jpg"),
         P("Indigo Butti Block-Print Kurta", "Navy kurta with gold block-print motifs and gold buttons.",
