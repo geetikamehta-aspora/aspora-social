@@ -480,7 +480,7 @@ def page_cover():
             f'{sticker("Festive<br>Edit", 11, 12, 33, -12, "round")}'
             f'<div class="pill">Our Collection</div>'
             f'<div class="sub">Clothes &amp; Accessories</div>'
-            f'{trail(walk, 8.5, "purple")}<div class="arches">{a}</div></section>')
+            f'{trail(walk, 8.5, "purple")}<div class="stage"><img src="images/cover-stage.jpg" alt=""></div></section>')
 
 
 def page_contents(toc, n):
