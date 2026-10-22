@@ -27,7 +27,7 @@ CATEGORIES = [
         P("Aasmani Mirror-Work Kurta", "Sky-blue kurta with gold stars and hand-finished mirror borders.",
           ["Mirror, sequin and thread borders", "Mandarin collar, centre placket", "Flared sleeves, embroidered cuffs"], "sky-golden-retriever.jpg", "sky-flatlay-front.jpg"),
         P("Rangeela Jacket Kurta Set", "A multi-print ethnic jacket layered over a hot-pink kurta.",
-          ["Patchwork floral and paisley jacket", "Gold-lace striped sleeves", "Sizes XS to XL"], "rangeela-kurta-set-golden-retriever.jpg", "rangeela-kurta-set-front.jpg", tag="Pet Kurta Koti"),
+          ["Patchwork floral and paisley jacket", "Gold-lace striped sleeves", "Curved hem, easy to wear"], "rangeela-kurta-set-golden-retriever.jpg", "rangeela-kurta-set-front.jpg", tag="Pet Kurta Koti"),
         P("Haldi Silver-Lace Kurta", "Sunny haldi-yellow kurta trimmed with silver zari lace.",
           ["Silver lace on collar and cuffs", "Stand collar, centre placket", "Curved hem"], "haldi-silver-lace-kurta-golden-retriever.jpg", "haldi-silver-lace-kurta-front.jpg"),
         P("Phoolwari Pocket Kurta", "Sky-blue floral and paisley kurta with a mustard pocket square.",
