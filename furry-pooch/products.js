@@ -97,5 +97,10 @@ window.FP_LOOKBOOK = [
   { c:'FP53', img:'assets/lookbook/FP53.webp', w:1100, h:1005, note:'Reflective mesh harness with its own leash' },
   { c:'FP52', img:'assets/lookbook/FP52.webp', w:1100, h:1005, note:'Teddy-bear patch on soft grey tweed' },
   { c:'FP51', img:'assets/lookbook/FP51.webp', w:1100, h:1100, note:'Padded nylon training collar with a control handle' },
-  { c:'FP58', img:'assets/lookbook/FP58.webp', w:1100, h:1100, note:'Stainless steel clipper with a safety lock and nail file' }
+  { c:'FP58', img:'assets/lookbook/FP58.webp', w:1100, h:1100, note:'Stainless steel clipper with a safety lock and nail file' },
+  { c:'FP36', img:'assets/lookbook/FP36.webp', w:1100, h:1100, note:'Notched-lapel tuxedo bandanas in sky blue and grey plaid' },
+  { c:'FP35', img:'assets/lookbook/FP35.webp', w:1100, h:1005, note:'Black with a red bow, or red with a black bow' },
+  { c:'FP34', img:'assets/lookbook/FP34.webp', w:1100, h:1005, note:'Black with a white shirt front and bow tie' },
+  { c:'FP49', img:'assets/lookbook/FP49.webp', w:1100, h:1100, note:'Lightweight lime mesh vest for cats and small dogs' },
+  { c:'FP50', img:'assets/lookbook/FP50.webp', w:1100, h:1100, note:'Braided rope leash with reflective threads, in ten colours' }
 ];
