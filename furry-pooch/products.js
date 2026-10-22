@@ -117,5 +117,10 @@ window.FP_LOOKBOOK = [
   { c:'FP20', img:'assets/lookbook/FP20.webp', w:1100, h:1100, note:'Deep-purple double-layer twirl dress with gold gota lace' },
   { c:'FP03', img:'assets/lookbook/FP03.webp', w:1100, h:1100, note:'Multi-print ethnic jacket over a hot-pink kurta' },
   { c:'FP04', img:'assets/lookbook/FP04.webp', w:1100, h:1100, note:'Haldi-yellow kurta trimmed with silver zari lace' },
-  { c:'FP19', img:'assets/lookbook/FP19.webp', w:1100, h:1100, note:'Red party frock with gold motifs, a waist bow and tassels' }
+  { c:'FP19', img:'assets/lookbook/FP19.webp', w:1100, h:1100, note:'Red party frock with gold motifs, a waist bow and tassels' },
+  { c:'FP18', img:'assets/lookbook/FP18.webp', w:1100, h:1100, note:'Pink and gold paisley brocade jacket with a front zip' },
+  { c:'FP02', img:'assets/lookbook/FP02.webp', w:1100, h:1172, note:'Sky blue with gold stars and mirror borders' },
+  { c:'FP05', img:'assets/lookbook/FP05.webp', w:1100, h:1005, note:'Sky-blue floral and paisley with a mustard pocket square' },
+  { c:'FP01', img:'assets/lookbook/FP01.webp', w:1100, h:1100, note:'Aqua-teal with coral, pink and gold floral embroidery' },
+  { c:'FP01', img:'assets/lookbook/FP01-2.webp', w:1100, h:1100, note:'A second look at the aqua floral embroidered kurta' }
 ];
