@@ -76,15 +76,21 @@ window.FP_PRODUCTS = [
   { c:'FP60', k:'tee', n:'Elephant Pet T-Shirt', d:'Soft white tee with a hand-painted elephant wearing a purple bow.', b:['Soft, breathable fabric','Easy to wash and durable','Comfortable neck, stretchy fit'] }
 ];
 
+/* also = other codes shown in the same photo; title overrides the caption name. */
 window.FP_LOOKBOOK = [
-  { c:'FP11', img:'assets/lookbook/FP11.webp', note:'Peacocks and blooms, hand-block feel' },
-  { c:'FP10', img:'assets/lookbook/FP10.webp', note:'Silver-gold brocade over sky blue' },
-  { c:'FP12', img:'assets/lookbook/FP12.webp', note:'Plum with an embroidered paisley panel' },
-  { c:'FP09', img:'assets/lookbook/FP09.webp', note:'Floral brocade koti over bottle green' },
-  { c:'FP15', img:'assets/lookbook/FP15.webp', note:'Navy with gold gota stripes' },
-  { c:'FP14', img:'assets/lookbook/FP14.webp', note:'Saffron with diagonal gota' },
-  { c:'FP13', img:'assets/lookbook/FP13.webp', note:'Indigo with gold butti motifs' },
-  { c:'FP08', img:'assets/lookbook/FP08.webp', note:'Mustard block print, for dogs and cats' },
-  { c:'FP53', img:'assets/lookbook/FP53.webp', note:'Reflective mesh harness with its own leash' },
-  { c:'FP52', img:'assets/lookbook/FP52.webp', note:'Teddy-bear patch on soft grey tweed' }
+  { c:'FP11', img:'assets/lookbook/FP11.webp', w:1100, h:1005, note:'Peacocks and blooms, hand-block feel' },
+  { c:'FP10', img:'assets/lookbook/FP10.webp', w:1100, h:1005, note:'Silver-gold brocade over sky blue' },
+  { c:'FP12', img:'assets/lookbook/FP12.webp', w:1100, h:1005, note:'Plum with an embroidered paisley panel' },
+  { c:'FP09', img:'assets/lookbook/FP09.webp', w:1100, h:1005, note:'Floral brocade koti over bottle green' },
+  { c:'FP15', img:'assets/lookbook/FP15.webp', w:1100, h:1005, note:'Navy with gold gota stripes' },
+  { c:'FP14', img:'assets/lookbook/FP14.webp', w:1100, h:1005, note:'Saffron with diagonal gota' },
+  { c:'FP13', img:'assets/lookbook/FP13.webp', w:1100, h:1005, note:'Indigo with gold butti motifs' },
+  { c:'FP08', img:'assets/lookbook/FP08.webp', w:1100, h:1005, note:'Mustard block print, for dogs and cats' },
+  { c:'FP07', img:'assets/lookbook/FP07.webp', w:1100, h:1005, note:'Red with all-over gold jaal and beaded lace' },
+  { c:'FP41', img:'assets/lookbook/FP41.webp', w:1100, h:1005, note:'Deep emerald with gold gota lace' },
+  { c:'FP38', also:['FP39'], title:'Lal Jaali & Gulabi Sheesha Bow Bandanas', img:'assets/lookbook/FP38.webp', w:1100, h:1327, note:'Crimson FP38 and pink mirror-work FP39, both with big bows' },
+  { c:'FP42', also:['FP43','FP44','FP45'], title:'Festive Bow Bandanas', img:'assets/lookbook/FP42.webp', w:1100, h:1005, note:'FP42 black floral, FP43 gold frill, FP44 saffron stripe, FP45 navy paisley' },
+  { c:'FP55', also:['FP56'], title:'Santa & Reindeer Headbands', img:'assets/lookbook/FP55.webp', w:1100, h:1005, note:'FP55 Santa and FP56 reindeer, for Christmas photos' },
+  { c:'FP53', img:'assets/lookbook/FP53.webp', w:1100, h:1005, note:'Reflective mesh harness with its own leash' },
+  { c:'FP52', img:'assets/lookbook/FP52.webp', w:1100, h:1005, note:'Teddy-bear patch on soft grey tweed' }
 ];

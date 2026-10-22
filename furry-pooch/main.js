@@ -372,9 +372,9 @@
     fab.classList.toggle('has', picks.length > 0);
     if (bump) { fab.classList.remove('bump'); void fab.offsetWidth; fab.classList.add('bump'); }
     $$('.pick-btn').forEach(b => {
-      const on = picks.includes(b.dataset.pick);
+      const cs = b.dataset.pick.split(','), on = cs.every(c => picks.includes(c));
       b.classList.toggle('on', on); b.setAttribute('aria-pressed', on);
-      b.setAttribute('aria-label', (on ? 'Remove ' : 'Add ') + b.dataset.pick + (on ? ' from' : ' to') + ' my picks');
+      b.setAttribute('aria-label', (on ? 'Remove ' : 'Add ') + cs.join(', ') + (on ? ' from' : ' to') + ' my picks');
     });
     dList.innerHTML = picks.map(c => { const p = byCode[c]; return `<li><img src="${photo(c)}" alt=""><div><b>${c}</b><span>${esc(p.n)}</span></div><button data-rm="${c}" aria-label="Remove ${c}" data-cursor="remove"><svg><use href="#close"/></svg></button></li>`; }).join('');
     dEmpty.hidden = picks.length > 0;
@@ -384,14 +384,14 @@
     syncOrder();
     if ($('#modal') && !$('#modal').hidden && modalCode) fillPickBtn();
   }
-  function togglePick(code, el) {
-    const i = picks.indexOf(code);
-    if (i >= 0) picks.splice(i, 1);
-    else {
-      picks.push(code);
+  function togglePick(codes, el) {
+    const cs = String(codes).split(',');
+    const adding = !cs.every(c => picks.includes(c));
+    if (adding) {
+      cs.forEach(c => { if (!picks.includes(c)) picks.push(c); });
       if (el) { const r = el.getBoundingClientRect(); burst(r.left + r.width / 2, r.top + r.height / 2, true, ['paw', 'heart', 'sparkle']); }
-    }
-    refreshPicks(i < 0);
+    } else picks = picks.filter(c => !cs.includes(c));
+    refreshPicks(adding);
   }
   function openDrawer() { drawer.hidden = false; requestAnimationFrame(() => drawer.classList.add('open')); lock(true); $('.drawer-head button', drawer).focus(); }
   function closeDrawer() { drawer.classList.remove('open'); lock(false); setTimeout(() => { drawer.hidden = true; }, 350); fab.focus({ preventScroll: true }); }
@@ -521,9 +521,11 @@
   /* ---- lookbook ---- */
   const lbTrack = $('#lbTrack');
   lbTrack.innerHTML = LB.map(l => {
-    const p = byCode[l.c];
-    return `<figure class="lb-card"><button class="lb-img" data-open="${l.c}" aria-label="View ${esc(p.n)}, ${l.c}" data-cursor="view"><img src="${l.img}" alt="Lookbook collage: ${esc(p.n)} on a dog and a cat, with fabric and stitching close-ups" loading="lazy" width="1100" height="1005"></button>
-      <figcaption><span class="code">${l.c}</span><div><b>${esc(p.n)}</b><small>${esc(l.note)}</small></div><button class="pick-btn" data-pick="${l.c}" aria-pressed="false" data-cursor="add!"><svg><use href="#paw"/></svg></button></figcaption></figure>`;
+    const p = byCode[l.c], all = [l.c, ...(l.also || [])];
+    const badge = all.length > 1 ? `${all[0]}–${all[all.length - 1].slice(2)}` : l.c;
+    const name = l.title || p.n;
+    return `<figure class="lb-card"><button class="lb-img" data-open="${l.c}" aria-label="View ${esc(name)}, ${badge}" data-cursor="view"><img src="${l.img}" alt="Lookbook collage: ${esc(name)} on dogs and cats, with fabric and stitching close-ups" loading="lazy" width="${l.w}" height="${l.h}" style="aspect-ratio:${l.w}/${l.h}"></button>
+      <figcaption><span class="code">${badge}</span><div><b>${esc(name)}</b><small>${esc(l.note)}</small></div><button class="pick-btn" data-pick="${all.join(',')}" aria-pressed="false" data-cursor="add!"><svg><use href="#paw"/></svg></button></figcaption></figure>`;
   }).join('');
   lbTrack.addEventListener('click', e => {
     const o = e.target.closest('[data-open]'); if (o) return openModal(o.dataset.open, LB.map(l => byCode[l.c]), o);
