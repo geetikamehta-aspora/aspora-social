@@ -546,3 +546,6 @@ section{position:relative}
   .medal span{font-size:.8rem}
   .lb-card figcaption b{font-size:1.05rem}
 }
+
+/* clipped sections must never scroll sideways when focus or buttons move content */
+.hero,.lookbook,.how,.boop,.contact,.footer,.collections,.about{overflow:hidden;overflow:clip}

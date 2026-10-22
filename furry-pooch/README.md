@@ -11,7 +11,7 @@ npx http-server furry-pooch
 - `products.js` — all catalogue data: names, descriptions, highlights, collections, lookbook. Edit or add products here.
 - `styles.css` — brand tokens at the top (`--sun`, `--choc`, `--indigo` …) taken from the logo and business card
 - `main.js` — paw cursor and trail, click effects, scroll reveals, marquee, filters and search, product quick view, My picks drawer, lookbook, order helper
-- `assets/products/FPxx.webp` (main photo) and `FPxx-b.webp` (flat-lay or detail), `assets/lookbook/` collages
+- `assets/products/FPxx.webp` (main photo) and `FPxx-b.webp` (flat-lay or detail), `assets/lookbook/` collages (10 looks)
 
 ## How ordering works
 There is no checkout and no prices, matching the catalogue. Visitors save styles to **My picks**, then the order helper writes a message listing the codes. They copy it into an Instagram DM to @furry.pooch (Instagram cannot pre-fill a message), or send it on WhatsApp to +91 99407 27027.

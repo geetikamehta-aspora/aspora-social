@@ -79,7 +79,12 @@ window.FP_PRODUCTS = [
 window.FP_LOOKBOOK = [
   { c:'FP11', img:'assets/lookbook/FP11.webp', note:'Peacocks and blooms, hand-block feel' },
   { c:'FP10', img:'assets/lookbook/FP10.webp', note:'Silver-gold brocade over sky blue' },
+  { c:'FP12', img:'assets/lookbook/FP12.webp', note:'Plum with an embroidered paisley panel' },
+  { c:'FP09', img:'assets/lookbook/FP09.webp', note:'Floral brocade koti over bottle green' },
   { c:'FP15', img:'assets/lookbook/FP15.webp', note:'Navy with gold gota stripes' },
   { c:'FP14', img:'assets/lookbook/FP14.webp', note:'Saffron with diagonal gota' },
-  { c:'FP13', img:'assets/lookbook/FP13.webp', note:'Indigo with gold butti motifs' }
+  { c:'FP13', img:'assets/lookbook/FP13.webp', note:'Indigo with gold butti motifs' },
+  { c:'FP08', img:'assets/lookbook/FP08.webp', note:'Mustard block print, for dogs and cats' },
+  { c:'FP53', img:'assets/lookbook/FP53.webp', note:'Reflective mesh harness with its own leash' },
+  { c:'FP52', img:'assets/lookbook/FP52.webp', note:'Teddy-bear patch on soft grey tweed' }
 ];
