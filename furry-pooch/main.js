@@ -346,8 +346,21 @@
   const IG = 'https://ig.me/m/furry.pooch';
   const PR = window.FP_PRICES || {};
   const inr = n => '₹' + Number(n).toLocaleString('en-IN');
+  const SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+  const sizable = c => !['care', 'hat'].includes((byCode[c] || {}).k) && c !== 'FP50';
+  let sizes = {};
+  try { sizes = JSON.parse(localStorage.getItem('fp-sizes') || '{}') || {}; } catch (_) {}
+  const saveSizes = () => { try { localStorage.setItem('fp-sizes', JSON.stringify(sizes)); } catch (_) {} };
   const minPrice = c => { const v = PR[c]; if (v == null) return null; return typeof v === 'object' ? Math.min(...Object.values(v)) : v; };
-  const priceText = c => { const v = PR[c]; if (v == null) return ''; return typeof v === 'object' ? 'from ' + inr(minPrice(c)) : inr(v); };
+  /* price for the chosen size; null when the size has no listed price */
+  const unitPrice = c => { const v = PR[c]; if (v == null) return null; if (typeof v !== 'object') return v; const s = sizes[c]; return s ? (v[s] != null ? v[s] : null) : minPrice(c); };
+  const priceText = c => {
+    const v = PR[c]; if (v == null) return '';
+    if (typeof v !== 'object') return inr(v);
+    const s = sizes[c];
+    if (!s) return 'from ' + inr(minPrice(c));
+    return v[s] != null ? inr(v[s]) : 'Ask us for ' + s;
+  };
   const sizeText = c => { const v = PR[c]; return v && typeof v === 'object' ? Object.entries(v).map(([k, x]) => `${k} ${inr(x)}`).join(' · ') : ''; };
 
   /* ---- scroll lock shared by modal, drawer and menu ---- */
@@ -370,7 +383,7 @@
   const oCodes = $('#oCodes'), picksLine = $('#picksLine');
   let codesDirty = false;
 
-  function savePicks() { try { localStorage.setItem('fp-picks', JSON.stringify(picks)); } catch (_) {} }
+  function savePicks() { try { localStorage.setItem('fp-picks', JSON.stringify(picks)); } catch (_) {} saveSizes(); }
   function refreshPicks(bump) {
     savePicks();
     fabCount.textContent = picks.length; dCount.textContent = picks.length;
@@ -381,13 +394,17 @@
       b.classList.toggle('on', on); b.setAttribute('aria-pressed', on);
       b.setAttribute('aria-label', (on ? 'Remove ' : 'Add ') + cs.join(', ') + (on ? ' from' : ' to') + ' my picks');
     });
-    dList.innerHTML = picks.map(c => { const p = byCode[c]; return `<li><img src="${photo(c)}" alt=""><div><b>${c}</b><span>${esc(p.n)}${PR[c] != null ? ' · ' + priceText(c) : ''}</span></div><button data-rm="${c}" aria-label="Remove ${c}" data-cursor="remove"><svg><use href="#close"/></svg></button></li>`; }).join('');
+    dList.innerHTML = picks.map(c => { const p = byCode[c];
+      const sel = sizable(c) ? `<select class="d-size" data-sz="${c}" aria-label="Size for ${c}"><option value="">Size</option>${SIZES.map(s => `<option${sizes[c] === s ? ' selected' : ''}>${s}</option>`).join('')}</select>` : '';
+      return `<li><img src="${photo(c)}" alt=""><div><b>${c}</b><span>${esc(p.n)}${PR[c] != null ? ' · ' + priceText(c) : ''}</span>${sel}</div><button data-rm="${c}" aria-label="Remove ${c}" data-cursor="remove"><svg><use href="#close"/></svg></button></li>`; }).join('');
+    $$('.price[data-pc]').forEach(e => { e.textContent = priceText(e.dataset.pc); });
     dEmpty.hidden = picks.length > 0;
-    const priced = picks.filter(c => PR[c] != null), tot = priced.reduce((s, c) => s + minPrice(c), 0);
+    const priced = picks.filter(c => unitPrice(c) != null), tot = priced.reduce((s, c) => s + unitPrice(c), 0);
+    const open = picks.filter(c => PR[c] != null && typeof PR[c] === 'object' && !sizes[c]).length;
     $('#dTotal').hidden = !priced.length;
-    $('#dTotal').textContent = priced.length ? `${priced.some(c => typeof PR[c] === 'object') ? 'From ' : ''}${inr(tot)}${priced.length < picks.length ? ' for priced styles' : ''}` : '';
+    $('#dTotal').textContent = priced.length ? `${open ? 'From ' : ''}${inr(tot)}${priced.length < picks.length ? ' for priced styles' : ''}${open ? ' · pick sizes for exact prices' : ''}` : '';
     $('#dGo').style.display = $('#dClear').style.display = picks.length ? '' : 'none';
-    if (!codesDirty) oCodes.value = picks.join(', ');
+    if (!codesDirty) oCodes.value = picks.map(c => c + (sizes[c] ? ` (${sizes[c]})` : '')).join(', ');
     picksLine.textContent = picks.length ? 'Filled from My picks: ' + picks.map(c => byCode[c].n).join(', ') + '.' : '';
     syncOrder();
     if ($('#modal') && !$('#modal').hidden && modalCode) fillPickBtn();
@@ -408,6 +425,7 @@
     if (e.target.closest('[data-dclose]')) return closeDrawer();
     const rm = e.target.closest('[data-rm]'); if (rm) { picks = picks.filter(c => c !== rm.dataset.rm); refreshPicks(); }
   });
+  drawer.addEventListener('change', e => { const s = e.target.closest('[data-sz]'); if (s) { sizes[s.dataset.sz] = s.value; if (!s.value) delete sizes[s.dataset.sz]; refreshPicks(); } });
   $('#dClear').addEventListener('click', () => { picks = []; codesDirty = false; refreshPicks(); });
   $('#dGo').addEventListener('click', () => { closeDrawer(); });
 
@@ -452,7 +470,7 @@
           <span class="code">${p.c}</span>
         </button>
         <button class="pick-btn" data-pick="${p.c}" aria-pressed="false" data-cursor="add!"><svg><use href="#paw"/></svg></button>
-        <div class="pbody"><span class="tag">${esc(tagOf(p))}</span><h3>${esc(p.n)}</h3><p>${esc(p.d)}</p>${PR[p.c] != null ? `<b class="price">${priceText(p.c)}</b>` : ''}</div>
+        <div class="pbody"><span class="tag">${esc(tagOf(p))}</span><h3>${esc(p.n)}</h3><p>${esc(p.d)}</p>${PR[p.c] != null ? `<b class="price" data-pc="${p.c}">${priceText(p.c)}</b>` : ''}</div>
       </article></li>`).join('');
     emptyEl.hidden = shown.length > 0;
     const label = fcol === 'all' ? 'all collections' : colName[fcol];
@@ -476,12 +494,22 @@
   function fillModal(code) {
     const p = byCode[code]; modalCode = code;
     $('#mCode').textContent = code; $('#mTag').textContent = tagOf(p); $('#mName').textContent = p.n; $('#mDesc').textContent = p.d;
-    $('#mPrice').innerHTML = PR[code] != null ? `<b>${priceText(code)}</b>${sizeText(code) ? `<small>${sizeText(code)}</small>` : ''}` : '';
+    fillSizes();
     $('#mList').innerHTML = p.b.map(x => `<li><svg><use href="#paw"/></svg>${esc(x)}</li>`).join('');
     mImg.alt = p.n;
     mThumbs.innerHTML = [0, 1].map(i => `<button data-v="${i}" aria-label="${i ? 'Flat-lay or detail' : 'On a pet'}" aria-pressed="false"><img src="${photo(code, i === 1)}" alt=""></button>`).join('');
     showView(0); fillPickBtn();
     $('#mHint').textContent = 'We copy the message so you can paste it in the DM.';
+  }
+  function fillSizes() {
+    const c = modalCode, v = PR[c], box = $('#mSizes'), obj = v && typeof v === 'object';
+    $('#mPrice').innerHTML = v != null ? `<b>${priceText(c)}</b>` : '';
+    if (!sizable(c)) { box.hidden = true; box.innerHTML = ''; return; }
+    box.hidden = false;
+    box.innerHTML = `<span class="sz-label">Size${sizes[c] ? '' : ' <i>(choose one)</i>'}</span><div class="sz-row" role="group" aria-label="Choose a size">${SIZES.map(s => {
+      const pr = obj ? v[s] : null;
+      return `<button type="button" class="sz${sizes[c] === s ? ' on' : ''}" data-size="${s}" aria-pressed="${sizes[c] === s}" data-cursor="${s}"><b>${s}</b>${obj ? `<small>${pr != null ? inr(pr) : 'ask'}</small>` : ''}</button>`;
+    }).join('')}</div>`;
   }
   function fillPickBtn() {
     const on = picks.includes(modalCode), b = $('#mPick');
@@ -503,15 +531,18 @@
   modal.addEventListener('click', e => {
     if (e.target.closest('[data-close]')) return closeModal();
     const v = e.target.closest('[data-v]'); if (v) showView(+v.dataset.v);
+    const z = e.target.closest('[data-size]');
+    if (z) { const s = z.dataset.size; if (sizes[modalCode] === s) delete sizes[modalCode]; else sizes[modalCode] = s; saveSizes(); fillSizes(); refreshPicks(); }
   });
   $('#mPrev').addEventListener('click', () => stepModal(-1));
   $('#mNext').addEventListener('click', () => stepModal(1));
   $('#mPick').addEventListener('click', e => togglePick(modalCode, e.currentTarget));
   $('#mIg').addEventListener('click', async () => {
-    const p = byCode[modalCode];
-    const ok = await copyText(`Hi Furry Pooch! 🐾 I'd like to order ${p.c} ${p.n}. My pet's size: `);
-    $('#mHint').textContent = ok ? 'Copied! Paste it in the Instagram chat and add your pet\'s size.' : 'Message @furry.pooch with the code ' + p.c + '.';
+    const p = byCode[modalCode], s = sizes[modalCode], pr = PR[modalCode] != null && unitPrice(modalCode) != null ? ` (${priceText(modalCode)})` : '';
+    const ok = await copyText(`Hi Furry Pooch! 🐾 I'd like to order ${p.c} ${p.n}${s ? ', size ' + s : ''}${pr}.${s || !sizable(p.c) ? '' : " My pet's size: "}`);
+    $('#mHint').textContent = ok ? (s || !sizable(p.c) ? 'Copied! Paste it in the Instagram chat.' : 'Copied! Paste it in the Instagram chat and add your pet\'s size.') : 'Message @furry.pooch with the code ' + p.c + '.';
   });
+
   addEventListener('keydown', e => {
     if (!modal.hidden) {
       if (e.key === 'Escape') closeModal();
@@ -556,15 +587,25 @@
   /* ---- order helper ---- */
   const form = $('#bookForm'), errEl = $('#formErr'), igBtn = $('#igBtn'), waBtn = $('#waBtn'), hint = $('#formHint');
   const oName = $('#oName'), oPet = $('#oPet'), oNote = $('#oNote');
-  function parseCodes(v) {
-    const found = [...v.matchAll(/fp\s*-?\s*(\d{1,2})/gi)].map(m => 'FP' + m[1].padStart(2, '0'));
-    return [...new Set(found)];
+  function parseItems(v) {
+    const out = [], seen = new Set();
+    for (const m of v.matchAll(/fp\s*-?\s*(\d{1,2})(?:\s*[\(\-:,]?\s*(xxl|xl|xs|s|m|l)\b\)?)?/gi)) {
+      const c = 'FP' + m[1].padStart(2, '0');
+      if (seen.has(c)) continue; seen.add(c);
+      out.push({ c, size: m[2] ? m[2].toUpperCase() : sizes[c] || '' });
+    }
+    return out;
   }
   function orderMessage() {
-    const raw = oCodes.value.trim(), codes = parseCodes(raw);
-    const items = codes.length ? codes.map(c => byCode[c] ? `${c} ${byCode[c].n}${PR[c] != null ? ' (' + priceText(c) + ')' : ''}` : c) : (raw ? [raw] : []);
+    const raw = oCodes.value.trim(), list = parseItems(raw);
+    const items = list.length ? list.map(({ c, size }) => {
+      if (!byCode[c]) return c;
+      const v = PR[c]; let pr = '';
+      if (v != null) pr = typeof v === 'object' ? (size && v[size] != null ? inr(v[size]) : size ? '' : 'from ' + inr(minPrice(c))) : inr(v);
+      return `${c} ${byCode[c].n}${size ? ', size ' + size : ''}${pr ? ' (' + pr + ')' : ''}`;
+    }) : (raw ? [raw] : []);
     const pet = oPet.value.trim(), note = oNote.value.trim(), name = oName.value.trim();
-    return `Hi Furry Pooch! 🐾 I'd like to order: ${items.length ? items.join(', ') : '…'}.` + (pet ? ` For my pet: ${pet}.` : '') + (note ? ` Note: ${note}.` : '') + (name ? ` Thanks, ${name}` : '');
+    return `Hi Furry Pooch! 🐾 I'd like to order: ${items.length ? items.join('; ') : '…'}.` + (pet ? ` For my pet: ${pet}.` : '') + (note ? ` Note: ${note}.` : '') + (name ? ` Thanks, ${name}` : '');
   }
   function syncOrder() { if (waBtn) waBtn.href = `https://wa.me/${PHONE}?text=${encodeURIComponent(orderMessage())}`; }
   function validOrder() {
