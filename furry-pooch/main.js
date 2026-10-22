@@ -51,14 +51,11 @@
   $$('.split').forEach((s, i) => s.style.setProperty('--i', i));
 
   /* ---------------- reveal on scroll ---------------- */
-  function initReveal() {
-    const items = $$('.reveal, .steps-trail');
-    if (!('IntersectionObserver' in window)) { items.forEach(i => i.classList.add('in')); return; }
-    const io = new IntersectionObserver(es => es.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-    }), { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
-    items.forEach(i => io.observe(i));
-  }
+  const revealIO = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); revealIO.unobserve(e.target); }
+  }), { threshold: 0.1, rootMargin: '0px 0px -5% 0px' }) : null;
+  function observeReveal(items) { items.forEach(i => (revealIO ? revealIO.observe(i) : i.classList.add('in'))); }
+  function initReveal() { observeReveal($$('.reveal:not(.in), .steps-trail:not(.in)')); }
 
   /* ---------------- pointer state ---------------- */
   let mx = innerWidth / 2, my = innerHeight / 2;
@@ -78,7 +75,7 @@
     document.body.append(cursor, label);
 
     document.addEventListener('mouseover', e => {
-      const t = e.target.closest('a,button,select,input,textarea,label,[data-tilt],[data-cursor],.nose');
+      const t = e.target.closest('a,button,select,input,textarea,label,[data-tilt],[data-cursor],.nose,.pcard,.col-row');
       cursor.classList.toggle('hover', !!t);
       const c = e.target.closest('[data-cursor]');
       if (c) { label.textContent = c.dataset.cursor; label.classList.add('show'); }
@@ -281,11 +278,12 @@
 
   /* ---------------- mobile menu ---------------- */
   const burger = $('#burger'), menu = $('#menu');
+  let menuWasOpen = false;
   function setMenu(open) {
     menu.classList.toggle('open', open);
     burger.setAttribute('aria-expanded', open);
     menu.setAttribute('aria-hidden', !open);
-    body.style.overflow = open ? 'hidden' : '';
+    if (open !== menuWasOpen) { menuWasOpen = open; lock(open); }
     burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
   }
   burger.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
@@ -336,48 +334,252 @@
     });
   }
 
-  /* ---------------- service buttons preselect form ---------------- */
-  const sel = $('#serviceSel');
-  $$('[data-svc]').forEach(a => a.addEventListener('click', () => {
-    const o = [...sel.options].find(o => o.text === a.dataset.svc);
-    if (o) sel.value = o.value || o.text;
-  }));
+  /* ============================================================
+     SHOP: collections, filters, grid, quick view, My picks, lookbook, order helper
+     ============================================================ */
+  const P = window.FP_PRODUCTS || [], COLS = window.FP_COLLECTIONS || [], LB = window.FP_LOOKBOOK || [];
+  const byCode = Object.fromEntries(P.map(p => [p.c, p]));
+  const colName = Object.fromEntries(COLS.map(c => [c.key, c.name]));
+  const photo = (c, alt) => `assets/products/${c}${alt ? '-b' : ''}.webp`;
+  const esc = s => String(s).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+  const tagOf = p => p.t || colName[p.k];
+  const IG = 'https://ig.me/m/furry.pooch';
 
-  /* ---------------- booking form -> WhatsApp link / copy ---------------- */
-  const form = $('#bookForm'), errEl = $('#formErr'), waBtn = $('#waBtn'), hint = $('#formHint');
-  function message() {
-    const f = new FormData(form);
-    const name = (f.get('name') || '').trim(), dog = (f.get('dog') || '').trim();
-    const when = (f.get('when') || '').trim() || 'flexible';
-    const note = (f.get('note') || '').trim();
-    return { name, dog, text: `Hi Furry Pooch! 🐾 I'm ${name || '…'}. My pooch is ${dog || '…'} and we're looking for: ${f.get('service')}. Preferred day & time: ${when}.` + (note ? ` Note: ${note}` : '') };
+  /* ---- scroll lock shared by modal, drawer and menu ---- */
+  let locks = 0;
+  function lock(on) { locks = Math.max(0, locks + (on ? 1 : -1)); body.style.overflow = locks ? 'hidden' : ''; }
+
+  /* ---- clipboard ---- */
+  async function copyText(text) {
+    try { await navigator.clipboard.writeText(text); return true; } catch (_) {}
+    const t = document.createElement('textarea'); t.value = text; t.style.cssText = 'position:fixed;opacity:0;top:0';
+    document.body.appendChild(t); t.select();
+    let ok = false; try { ok = document.execCommand('copy'); } catch (_) {} t.remove(); return ok;
   }
-  function syncLink() { waBtn.href = `https://wa.me/${PHONE}?text=${encodeURIComponent(message().text)}`; }
-  function valid() {
-    const m = message();
-    $$('input[name=name],input[name=dog]', form).forEach(i => i.classList.toggle('err', !i.value.trim()));
-    if (!m.name || !m.dog) { errEl.textContent = "Please add your name and your pooch's name 🐾"; return false; }
-    errEl.textContent = ''; return true;
+
+  /* ---- My picks (kept in memory, remembered in this browser when allowed) ---- */
+  let picks = [];
+  try { picks = JSON.parse(localStorage.getItem('fp-picks') || '[]').filter(c => byCode[c]); } catch (_) {}
+  const fab = $('#fab'), fabCount = $('#fabCount');
+  const drawer = $('#drawer'), dList = $('#dList'), dEmpty = $('#dEmpty'), dCount = $('#dCount');
+  const oCodes = $('#oCodes'), picksLine = $('#picksLine');
+  let codesDirty = false;
+
+  function savePicks() { try { localStorage.setItem('fp-picks', JSON.stringify(picks)); } catch (_) {} }
+  function refreshPicks(bump) {
+    savePicks();
+    fabCount.textContent = picks.length; dCount.textContent = picks.length;
+    fab.classList.toggle('has', picks.length > 0);
+    if (bump) { fab.classList.remove('bump'); void fab.offsetWidth; fab.classList.add('bump'); }
+    $$('.pick-btn').forEach(b => {
+      const on = picks.includes(b.dataset.pick);
+      b.classList.toggle('on', on); b.setAttribute('aria-pressed', on);
+      b.setAttribute('aria-label', (on ? 'Remove ' : 'Add ') + b.dataset.pick + (on ? ' from' : ' to') + ' my picks');
+    });
+    dList.innerHTML = picks.map(c => { const p = byCode[c]; return `<li><img src="${photo(c)}" alt=""><div><b>${c}</b><span>${esc(p.n)}</span></div><button data-rm="${c}" aria-label="Remove ${c}" data-cursor="remove"><svg><use href="#close"/></svg></button></li>`; }).join('');
+    dEmpty.hidden = picks.length > 0;
+    $('#dGo').style.display = $('#dClear').style.display = picks.length ? '' : 'none';
+    if (!codesDirty) oCodes.value = picks.join(', ');
+    picksLine.textContent = picks.length ? 'Filled from My picks: ' + picks.map(c => byCode[c].n).join(', ') + '.' : '';
+    syncOrder();
+    if ($('#modal') && !$('#modal').hidden && modalCode) fillPickBtn();
   }
-  form.addEventListener('input', syncLink);
-  form.addEventListener('change', syncLink);
-  form.addEventListener('submit', e => { e.preventDefault(); });
-  waBtn.addEventListener('click', e => { syncLink(); if (!valid()) e.preventDefault(); else toast('WOOF!'); });
-  $('#copyBtn').addEventListener('click', async () => {
-    if (!valid()) return;
-    const text = message().text;
-    let ok = false;
-    try { await navigator.clipboard.writeText(text); ok = true; } catch (_) {
-      const t = document.createElement('textarea'); t.value = text; t.style.cssText = 'position:fixed;opacity:0';
-      document.body.appendChild(t); t.select();
-      try { ok = document.execCommand('copy'); } catch (_) {} t.remove();
+  function togglePick(code, el) {
+    const i = picks.indexOf(code);
+    if (i >= 0) picks.splice(i, 1);
+    else {
+      picks.push(code);
+      if (el) { const r = el.getBoundingClientRect(); burst(r.left + r.width / 2, r.top + r.height / 2, true, ['paw', 'heart', 'sparkle']); }
     }
-    hint.innerHTML = ok ? 'Copied! Paste it in a message to <b>+91 99407 27027</b> or <b>furrypooch2@gmail.com</b>.' : 'Select and copy this: <b></b>';
-    if (!ok) hint.querySelector('b').textContent = text;
+    refreshPicks(i < 0);
+  }
+  function openDrawer() { drawer.hidden = false; requestAnimationFrame(() => drawer.classList.add('open')); lock(true); $('.drawer-head button', drawer).focus(); }
+  function closeDrawer() { drawer.classList.remove('open'); lock(false); setTimeout(() => { drawer.hidden = true; }, 350); fab.focus({ preventScroll: true }); }
+  fab.addEventListener('click', openDrawer);
+  drawer.addEventListener('click', e => {
+    if (e.target.closest('[data-dclose]')) return closeDrawer();
+    const rm = e.target.closest('[data-rm]'); if (rm) { picks = picks.filter(c => c !== rm.dataset.rm); refreshPicks(); }
+  });
+  $('#dClear').addEventListener('click', () => { picks = []; codesDirty = false; refreshPicks(); });
+  $('#dGo').addEventListener('click', () => { closeDrawer(); });
+
+  /* ---- collections index ---- */
+  const colList = $('#colList');
+  colList.innerHTML = COLS.map((c, i) => {
+    const items = P.filter(p => p.k === c.key), n = items.length;
+    const idx = n > 2 ? [0, Math.floor(n / 2), n - 1] : n === 2 ? [0, 1] : [0];
+    const th = idx.map(k => `<img src="${photo(items[k].c)}" alt="" loading="lazy">`).join('');
+    const range = c.from === c.to ? `FP${String(c.from).padStart(2, '0')}` : `FP${String(c.from).padStart(2, '0')}–FP${String(c.to).padStart(2, '0')}`;
+    return `<li class="reveal" style="--d:${i * 0.05}s"><button class="col-row" data-col="${c.key}" data-cursor="browse"><span class="col-no">${String(i + 1).padStart(2, '0')}</span><span class="col-txt"><b>${esc(c.name)}</b><small>${esc(c.blurb)} · ${range}</small></span><span class="col-th">${th}</span><span class="col-pill">${n} ${n === 1 ? 'style' : 'styles'}</span></button></li>`;
+  }).join('');
+  colList.addEventListener('click', e => { const b = e.target.closest('[data-col]'); if (b) { setFilter(b.dataset.col); $('#shop').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); } });
+
+  /* ---- filters + grid ---- */
+  const fchips = $('#fchips'), grid = $('#grid'), qEl = $('#q'), shopCount = $('#shopCount'), emptyEl = $('#empty');
+  let fcol = 'all', fq = '';
+  fchips.innerHTML = [{ key: 'all', name: 'All', n: P.length }, ...COLS.map(c => ({ key: c.key, name: c.name, n: P.filter(p => p.k === c.key).length }))]
+    .map(c => `<button class="fchip" data-f="${c.key}" aria-pressed="${c.key === 'all'}" data-cursor="filter">${esc(c.name)} <i>${c.n}</i></button>`).join('');
+  fchips.addEventListener('click', e => { const b = e.target.closest('[data-f]'); if (b) setFilter(b.dataset.f); });
+  qEl.addEventListener('input', () => { fq = qEl.value.trim().toLowerCase(); renderGrid(); });
+  $('#clearF').addEventListener('click', () => { qEl.value = ''; fq = ''; setFilter('all'); });
+  function setFilter(k) {
+    fcol = k;
+    $$('.fchip', fchips).forEach(b => b.setAttribute('aria-pressed', b.dataset.f === k));
+    renderGrid();
+  }
+  function matches(p) {
+    if (fcol !== 'all' && p.k !== fcol) return false;
+    if (!fq) return true;
+    let q = fq; const m = q.match(/^fp\s*-?\s*(\d{1,2})$/); if (m) q = 'fp' + m[1].padStart(2, '0');
+    return (p.c + ' ' + p.n + ' ' + p.d + ' ' + tagOf(p) + ' ' + p.b.join(' ')).toLowerCase().includes(q);
+  }
+  let shown = P;
+  function renderGrid() {
+    shown = P.filter(matches);
+    grid.innerHTML = shown.map((p, i) => `<li class="reveal" style="--d:${(i % 4) * 0.06}s">
+      <article class="pcard">
+        <button class="pimg" data-open="${p.c}" aria-label="View ${esc(p.n)}, ${p.c}" data-cursor="view">
+          <img class="p-a" src="${photo(p.c)}" alt="${esc(p.n)}" loading="lazy" decoding="async" width="720" height="560">
+          <img class="p-b" src="${photo(p.c, 1)}" alt="" loading="lazy" decoding="async" width="520" height="520">
+          <span class="code">${p.c}</span>
+        </button>
+        <button class="pick-btn" data-pick="${p.c}" aria-pressed="false" data-cursor="add!"><svg><use href="#paw"/></svg></button>
+        <div class="pbody"><span class="tag">${esc(tagOf(p))}</span><h3>${esc(p.n)}</h3><p>${esc(p.d)}</p></div>
+      </article></li>`).join('');
+    emptyEl.hidden = shown.length > 0;
+    const label = fcol === 'all' ? 'all collections' : colName[fcol];
+    shopCount.textContent = `Showing ${shown.length} ${shown.length === 1 ? 'style' : 'styles'} · ${label}` + (fq ? ` · “${qEl.value.trim()}”` : '');
+    refreshPicks();
+    observeReveal($$('.reveal:not(.in)', grid));
+  }
+  grid.addEventListener('click', e => {
+    const o = e.target.closest('[data-open]'); if (o) return openModal(o.dataset.open, shown, o);
+    const b = e.target.closest('[data-pick]'); if (b) togglePick(b.dataset.pick, b);
+  });
+
+  /* ---- quick view modal ---- */
+  const modal = $('#modal'), mImg = $('#mImg'), mThumbs = $('#mThumbs');
+  let modalCode = null, modalList = P, modalOpener = null, modalView = 0;
+  function showView(v) {
+    modalView = v;
+    mImg.src = photo(modalCode, v === 1);
+    $$('button', mThumbs).forEach((b, i) => b.setAttribute('aria-pressed', i === v));
+  }
+  function fillModal(code) {
+    const p = byCode[code]; modalCode = code;
+    $('#mCode').textContent = code; $('#mTag').textContent = tagOf(p); $('#mName').textContent = p.n; $('#mDesc').textContent = p.d;
+    $('#mList').innerHTML = p.b.map(x => `<li><svg><use href="#paw"/></svg>${esc(x)}</li>`).join('');
+    mImg.alt = p.n;
+    mThumbs.innerHTML = [0, 1].map(i => `<button data-v="${i}" aria-label="${i ? 'Flat-lay or detail' : 'On a pet'}" aria-pressed="false"><img src="${photo(code, i === 1)}" alt=""></button>`).join('');
+    showView(0); fillPickBtn();
+    $('#mHint').textContent = 'We copy the message so you can paste it in the DM.';
+  }
+  function fillPickBtn() {
+    const on = picks.includes(modalCode), b = $('#mPick');
+    b.innerHTML = `<svg><use href="#paw"/></svg>${on ? 'In my picks · remove' : 'Add to my picks'}`;
+    b.classList.toggle('is-on', on);
+  }
+  function openModal(code, list, opener) {
+    modalList = list && list.length ? list : P; modalOpener = opener || null;
+    fillModal(code); modal.hidden = false; requestAnimationFrame(() => modal.classList.add('open')); lock(true);
+    $('.modal-x', modal).focus();
+  }
+  function closeModal() { modal.classList.remove('open'); lock(false); setTimeout(() => { modal.hidden = true; }, 300); if (modalOpener && modalOpener.focus) modalOpener.focus({ preventScroll: true }); }
+  function stepModal(d) {
+    let i = modalList.findIndex(p => p.c === modalCode);
+    if (i < 0) i = 0;
+    fillModal(modalList[(i + d + modalList.length) % modalList.length].c);
+    const card = $('#modalCard'); card.classList.remove('swap'); void card.offsetWidth; card.classList.add('swap');
+  }
+  modal.addEventListener('click', e => {
+    if (e.target.closest('[data-close]')) return closeModal();
+    const v = e.target.closest('[data-v]'); if (v) showView(+v.dataset.v);
+  });
+  $('#mPrev').addEventListener('click', () => stepModal(-1));
+  $('#mNext').addEventListener('click', () => stepModal(1));
+  $('#mPick').addEventListener('click', e => togglePick(modalCode, e.currentTarget));
+  $('#mIg').addEventListener('click', async () => {
+    const p = byCode[modalCode];
+    const ok = await copyText(`Hi Furry Pooch! 🐾 I'd like to order ${p.c} ${p.n}. My pet's size: `);
+    $('#mHint').textContent = ok ? 'Copied! Paste it in the Instagram chat and add your pet\'s size.' : 'Message @furry.pooch with the code ' + p.c + '.';
+  });
+  addEventListener('keydown', e => {
+    if (!modal.hidden) {
+      if (e.key === 'Escape') closeModal();
+      else if (e.key === 'ArrowRight') stepModal(1);
+      else if (e.key === 'ArrowLeft') stepModal(-1);
+      else if (e.key === 'Tab') {
+        const f = $$('button:not([disabled]),a[href]', $('#modalCard')).filter(x => x.offsetParent !== null);
+        if (!f.length) return;
+        const first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    } else if (!drawer.hidden && e.key === 'Escape') closeDrawer();
+  });
+
+  /* ---- lookbook ---- */
+  const lbTrack = $('#lbTrack');
+  lbTrack.innerHTML = LB.map(l => {
+    const p = byCode[l.c];
+    return `<figure class="lb-card"><button class="lb-img" data-open="${l.c}" aria-label="View ${esc(p.n)}, ${l.c}" data-cursor="view"><img src="${l.img}" alt="Lookbook collage: ${esc(p.n)} on a dog and a cat, with fabric and stitching close-ups" loading="lazy" width="1100" height="1005"></button>
+      <figcaption><span class="code">${l.c}</span><div><b>${esc(p.n)}</b><small>${esc(l.note)}</small></div><button class="pick-btn" data-pick="${l.c}" aria-pressed="false" data-cursor="add!"><svg><use href="#paw"/></svg></button></figcaption></figure>`;
+  }).join('');
+  lbTrack.addEventListener('click', e => {
+    const o = e.target.closest('[data-open]'); if (o) return openModal(o.dataset.open, LB.map(l => byCode[l.c]), o);
+    const b = e.target.closest('[data-pick]'); if (b) togglePick(b.dataset.pick, b);
+  });
+  const lbStep = d => { const c = $('.lb-card', lbTrack); lbTrack.scrollBy({ left: d * (c ? c.offsetWidth + 24 : 400), behavior: reduce ? 'auto' : 'smooth' }); };
+  $('#lbPrev').addEventListener('click', () => lbStep(-1));
+  $('#lbNext').addEventListener('click', () => lbStep(1));
+  lbTrack.addEventListener('keydown', e => { if (e.key === 'ArrowRight') lbStep(1); if (e.key === 'ArrowLeft') lbStep(-1); });
+  // drag to scroll with a mouse
+  (() => {
+    let down = false, sx = 0, sl = 0, moved2 = 0;
+    lbTrack.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; down = true; sx = e.clientX; sl = lbTrack.scrollLeft; moved2 = 0; });
+    addEventListener('pointermove', e => { if (!down) return; const dx = e.clientX - sx; moved2 = Math.max(moved2, Math.abs(dx)); lbTrack.scrollLeft = sl - dx; });
+    addEventListener('pointerup', () => { down = false; });
+    lbTrack.addEventListener('click', e => { if (moved2 > 6) { e.stopPropagation(); e.preventDefault(); } }, true);
+  })();
+
+  /* ---- order helper ---- */
+  const form = $('#bookForm'), errEl = $('#formErr'), igBtn = $('#igBtn'), waBtn = $('#waBtn'), hint = $('#formHint');
+  const oName = $('#oName'), oPet = $('#oPet'), oNote = $('#oNote');
+  function parseCodes(v) {
+    const found = [...v.matchAll(/fp\s*-?\s*(\d{1,2})/gi)].map(m => 'FP' + m[1].padStart(2, '0'));
+    return [...new Set(found)];
+  }
+  function orderMessage() {
+    const raw = oCodes.value.trim(), codes = parseCodes(raw);
+    const items = codes.length ? codes.map(c => byCode[c] ? `${c} ${byCode[c].n}` : c) : (raw ? [raw] : []);
+    const pet = oPet.value.trim(), note = oNote.value.trim(), name = oName.value.trim();
+    return `Hi Furry Pooch! 🐾 I'd like to order: ${items.length ? items.join(', ') : '…'}.` + (pet ? ` For my pet: ${pet}.` : '') + (note ? ` Note: ${note}.` : '') + (name ? ` Thanks, ${name}` : '');
+  }
+  function syncOrder() { if (waBtn) waBtn.href = `https://wa.me/${PHONE}?text=${encodeURIComponent(orderMessage())}`; }
+  function validOrder() {
+    const okName = !!oName.value.trim(), okCodes = !!oCodes.value.trim();
+    oName.classList.toggle('err', !okName); oCodes.classList.toggle('err', !okCodes);
+    errEl.textContent = okName && okCodes ? '' : 'Please add your name and at least one product code, like FP07 🐾';
+    return okName && okCodes;
+  }
+  oCodes.addEventListener('input', () => { codesDirty = oCodes.value.trim() !== ''; });
+  form.addEventListener('input', e => { e.target.classList.remove('err'); syncOrder(); });
+  form.addEventListener('submit', e => e.preventDefault());
+  igBtn.addEventListener('click', async e => {
+    if (!validOrder()) { e.preventDefault(); return; }
+    const ok = await copyText(orderMessage());
+    hint.textContent = ok ? 'Copied! Paste it into your chat with @furry.pooch.' : 'Message @furry.pooch with your codes and pet size.';
     if (ok) toast('COPIED!');
   });
-  $$('input', form).forEach(i => i.addEventListener('input', () => i.classList.remove('err')));
-  syncLink();
+  waBtn.addEventListener('click', e => { syncOrder(); if (!validOrder()) e.preventDefault(); else toast('WOOF!'); });
+  $('#copyBtn').addEventListener('click', async () => {
+    if (!validOrder()) return;
+    const ok = await copyText(orderMessage());
+    hint.innerHTML = ok ? 'Copied! Paste it in an Instagram DM to <b>@furry.pooch</b>, or text <b>+91 99407 27027</b>.' : 'Select and copy this: <b></b>';
+    if (!ok) hint.querySelector('b').textContent = orderMessage(); else toast('COPIED!');
+  });
+
+  renderGrid();
 
   /* ---------------- in-page links (reliable inside a sandboxed frame) ---------------- */
   document.addEventListener('click', e => {
